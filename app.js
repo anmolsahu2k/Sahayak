@@ -5,10 +5,18 @@ let express  = require('express'),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
-    mongoose = require("mongoose");
+    mongoose = require("mongoose"),
+    flash = require("connect-flash");
 
 // importing enviroment variables
 require("dotenv").config();
+
+// ------------Import User Model-----------//
+const User = require('./models/userModel');
+
+// ------------Import Routes--------------//
+const authRoutes = require('./routes/authRoutes'),
+    indexRoutes = require('./routes/indexRoutes');
 
 mongoose.connect("mongodb://localhost:27017/smartVac", {
     useNewUrlParser: true,
@@ -29,6 +37,27 @@ app.use(
     })
 );
 
-app.listen(3000, function(){
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(methodOverride("_method"));
+app.use(flash());
+
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function (req, res, next) {
+    res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
+    next();
+});
+
+
+// ---------Use external Routes-------------// 
+app.use(indexRoutes);
+app.use(authRoutes);
+
+app.listen(process.env.APP_LISTEN_PORT, function(){
     console.log("Server is connected");
 });
