@@ -21,6 +21,7 @@ const userSchema = new mongoose.Schema({
         phone: Number,
         email: String
     },
+    role: {type: String, default: "notAdmin"},
     isAdmin : {type: Boolean, default: false}
 });
 
