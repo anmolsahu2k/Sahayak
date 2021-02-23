@@ -4,8 +4,6 @@ const   express = require("express"),
 
 const User = require("../models/userModel");
 
-
-
 // -------------Login GET request--------------//
 router.get("/userLogin", function (req, res) {
   // console.log(req.flash(error));
@@ -21,66 +19,71 @@ router.post(
     failureFlash: true,
   }),
   function (req, res) {
-    if (req.user.role == "patient") {
-      req.flash("success", "Welcome to MedBuddy! " + req.user.username);
+    if (req.user.role == "notAdmin") {
+      req.flash("success", "Welcome to SOSassist! " + req.user.username);
       res.redirect("/");
 
-    } else if (req.user.role == "doctor") {
-      req.flash("success", "Welcome to MedBuddy! " + req.user.username);
+    } else if (req.user.role == "admin") {
+      req.flash("success", "Welcome to SOSassist! " + req.user.username);
       res.redirect("/");
 
     } else res.send(404);
   }
 );
 
-//logout
+//-------------Logout-------------//
 router.get("/logout", function (req, res) {
   req.logout();
   req.flash("success", "Logged Out Successfully! ");
   res.redirect("/");
 });
 
-//Signup get requests
+//------------SignUp GET request--------//
 router.get("/register", function (req, res) {
   res.render("auth/signup");
 });
 
-//Signup post request
+//=-------------SignUP POST request---------//
 router.post("/register", function (req, res) {
-  // console.log("post in /register");
-  var newUser = new User({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    address: {
-      street: req.body.streetAddress,
-      city: req.body.city,
-      state: req.body.state,
-      zip: req.body.zip,
-    },
-    gender: req.body.gender,
-    username: req.body.username,
-    email: req.body.email,
-    phone: req.body.contactNumber,
-    avatar: req.body.avatar,
-    role: req.body.userRole,
-  });
-  User.register(newUser, req.body.password, function (err, user) {
-    if (err) {
-      console.log(err);
-      res.redirect("/register");
-    } else {
-      passport.authenticate("local")(req, res, function () {
-        req.flash("success", "Welcome to MedBuddy " + user.username);
-        if (req.user.role == "patient")
-          res.redirect("/");
-        else if (req.user.role == "doctor")
-          res.redirect("/");
-        else if (req.user.role == "hospAdmin")
-          res.redirect("/");
-        else res.send(404);
-      });
-    }
-  });
+    const newUser = {
+        name: {
+            firstName: req.body.firstName,
+            lastName: req.body.lastName
+        },
+        permanentAddress : {
+            street: req.body.street,
+            city:  req.body.city,
+            state:  req.body.state,
+            zip:  req.body.zip
+        },
+        currentAddress : {
+            location: req.body.currentAddress
+        },
+        username: req.body.username,
+        contact : {
+            phone: req.body.phone,
+            email: req.body.email
+        },
+        role: req.body.userRole,
+    };
+    if(req.body.adminCode == process.env.ADMIN_SECRET_CODE){
+        newUser.isAdmin = true;
+    };
+    User.register(newUser, req.body.password, function (err, user) {
+      if (err) {
+        console.log(err);
+        res.redirect("/register");
+      } else {
+        passport.authenticate("local")(req, res, function () {
+          req.flash("success", "Welcome to SOSassist " + user.username);
+          if (req.user.role == "notAdmin")
+            res.redirect("/");
+          else if (req.user.role == "admin")
+            res.redirect("/");
+          else res.send(404);
+        });
+      }
+    });
 });
 module.exports = router;
 
