@@ -15,7 +15,7 @@ require("dotenv").config();
 const User = require('./models/userModel');
 
 // ------------Import Routes--------------//
-const authRoutes = require('./routes/authRoutes'),
+let authRoutes = require('./routes/authRoutes'),
     indexRoutes = require('./routes/indexRoutes');
 
 mongoose.connect("mongodb://localhost:27017/smartVac", {

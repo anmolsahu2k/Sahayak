@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<%-include('partials/header')-%>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Merienda+One&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Merienda+One&family=Philosopher&display=swap');
+    body{
+        /* background: #f85032; 
+        background: -webkit-linear-gradient(to right, #e73827, #f85032);  
+        background: linear-gradient(to right, #e73827, #f85032);  */
+        background: rgb(210,85,7);
+        background: linear-gradient(90deg, rgba(210,85,7,1) 3%, rgba(210,27,21,0.958420868347339) 35%, rgba(210,7,52,1) 100%);
+    }
+    #text{
+        color: white;
+        width: 60%;
+        text-align: center;
+        margin: 12rem auto;
+    }
+
+    #text > h1{
+        color: whitesmoke;
+        font-family: 'Merienda One', cursive;
+        font-size: 3rem;
+    }
+
+    #text > p{
+        font-family: 'Merienda One', cursive;
+        font-family: 'Philosopher', sans-serif;
+        font-size: 18px;
+    }
+
+    #signup {background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%)}
+    #signup {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 25px;
+    display: inline-flex;
+    }
+
+    #signup:hover {
+    background-position: right center; /* change the direction of the change here */
+    color: #fff;
+    text-decoration: none;
+    }
+
+    #signin {background-image: linear-gradient(to right, #F7971E 0%, #FFD200  51%, #F7971E  100%)}
+         #signin {
+            margin: 10px;
+            padding: 15px 45px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: black;            
+            box-shadow: 0 0 20px #eee;
+            border-radius: 25px;
+            display: inline-flex;
+          }
+
+          #signin:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #000;
+            text-decoration: none;
+          }
+</style>
+<body>
+    <div id="text">
+        <h1>SOS Assist</h1>
+        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry
+            .Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+            It has survived not only five centuries, but also the leap into electronic typesetting, 
+            remaining essentially unchanged
+        </p>
+        <a class="btn btn-sm" id="signup" href="/signup">Sign Up!</a>
+        <a class="btn btn-sm" id="signin" href="/login">Login!</a>
+    </div>
+</body>
+
+<%-include('partials/footer')-%>
+</html>
