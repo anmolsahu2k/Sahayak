@@ -18,7 +18,7 @@ const User = require('./models/userModel');
 let authRoutes = require('./routes/authRoutes'),
     indexRoutes = require('./routes/indexRoutes');
 
-mongoose.connect("mongodb://localhost:27017/smartVac", {
+mongoose.connect("mongodb://localhost:27017/sosassist", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     });
