@@ -7,19 +7,67 @@
         <section class="d-flex align-items-center my-5 mt-lg-6 mb-lg-5">
             <div class="container">
                 <p class="text-center"><a href="../" class="text-gray-700"><i class="fas fa-angle-left me-2"></i> Back to homepage</a></p>
-                <div class="row justify-content-center form-bg-image" data-background-lg="../../assets/img/illustrations/signin.svg">
+                <!-- <div class="row justify-content-center form-bg-image" data-background-lg="../../assets/img/illustrations/signin.svg"> -->
                     <div class="col-12 d-flex align-items-center justify-content-center">
-                        <div class="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
+                        <div class="mb-4 mb-lg-0 bg-white shadow-soft border rounded border-light p-4 p-lg-5 " style="width: 80%;">
                             <div class="text-center text-md-center mb-4 mt-md-0">
                                 <h1 class="mb-0 h3">Create an account</h1>
                             </div>
                             <form action="/signup" method="POST">
+                                <div class="form-row">
+                                    <div class="form-group mb-4 col-md-6">
+                                        <label for="firstName">First Name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="firstName" placeholder="John" autofocus required>
+                                        </div>  
+                                    </div>
+                                    <div class="form-group mb-4 col-md-6">
+                                        <label for="lastName">Last Name</label>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" name="lastName" placeholder="Doe" id="lastName" required>
+                                        </div>  
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12 mb-4">
+                                        <label for="street">Street</label>
+                                        <input type="text" class="form-control" name="street" placeholder="XYZ avenue">
+                                    </div>
+                                </div>
+                                <div class="form-row" style="justify-content: space-between;">
+                                    <div class="form-group col-md-4 mb-4">
+                                        <label for="city">Street</label>
+                                        <input type="text" class="form-control" name="city" placeholder="Mumbai">
+                                    </div>
+                                    <div class="form-group col-md-4 mb-4">
+                                        <label for="state">Street</label>
+                                        <input type="text" class="form-control" name="state" placeholder="Maharashtra">
+                                    </div>
+                                    <div class="form-group col-md-3 mb-4">
+                                        <label for="zip">Zip</label>
+                                        <input type="number" class="form-control" name="zip" placeholder="000000">
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6 mb-4">
+                                        <label for="phone">Contact Number</label>
+                                        <div class="input-group">
+                                            <input type="text" placeholder="1234567890" class="form-control" id="phone" minlength="10" required>
+                                        </div>  
+                                    </div>
+                                    <div class="form-group col-md-6 mb-4">
+                                        <label for="email">Your E-mail</label>
+                                        <div class="input-group">
+                                            <input type="email" class="form-control" name="email" placeholder="example@company.com" id="email" required>
+                                        </div>  
+                                    </div>
+                                </div>
                                 <!-- Form -->
                                 <div class="form-group mb-4">
-                                    <label for="email">Your Email</label>
+                                    <label for="username">Your Username</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon3"><span class="fas fa-envelope"></span></span>
-                                        <input type="email" class="form-control" placeholder="example@company.com" id="email" autofocus required>
+                                        <input type="text" class="form-control" name="username" placeholder="username" id="username" required>
                                     </div>  
                                 </div>
                                 <!-- End of Form -->
@@ -29,20 +77,20 @@
                                         <label for="password">Your Password</label>
                                         <div class="input-group">
                                             <span class="input-group-text" id="basic-addon4"><span class="fas fa-unlock-alt"></span></span>
-                                            <input type="password" placeholder="Password" class="form-control" id="password" required>
+                                            <input type="password" placeholder="Password" name="password" class="form-control" id="password" required>
                                         </div>  
                                     </div>
                                     <!-- End of Form -->
-                                    <!-- Form -->
-                                    <div class="form-group mb-4">
-                                        <label for="confirm_password">Confirm Password</label>
-                                        <div class="input-group">
-                                            <span class="input-group-text" id="basic-addon5"><span class="fas fa-unlock-alt"></span></span>
-                                            <input type="password" placeholder="Confirm Password" class="form-control" id="confirm_password" required>
-                                        </div>  
-                                    </div>
-                                    <!-- End of Form -->
+                                    <!-- ----------Admin Checker---------- -->
                                     <div class="form-check mb-4">
+                                        <input class="form-check-input" type="checkbox" value="scheckbox" id="checkAdmin" name="checkAdmin">
+                                        <label class="form-check-label" for="checkAdmin">
+                                            Check if you are Site Administrator.
+                                        </label>
+                                    </div>
+                                    <input id="adminPassword" name="adminPassword" class="form-control" size="50" type="password" placeholder="Enter Admin Password" />
+                                    <!-- ------X-----Admin Checker----------X -->
+                                    <div class="form-check mb-4 mt-4">
                                         <input class="form-check-input" type="checkbox" value="" id="terms" required>
                                         <label class="form-check-label" for="terms">
                                             I agree to the <a href="#">terms and conditions</a>
@@ -75,8 +123,22 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                <!-- </div> -->
             </div>
         </section>
 
         <%-include('../partials/footer')-%>
+        <script>
+        $(function () {
+            $('input[name="adminPassword"]').hide();
+
+            //show it when the checkbox is clicked
+            $('input[name="checkAdmin"]').on('click', function () {
+                if ($(this).prop('checked')) {
+                    $('input[name="adminPassword"]').fadeIn();
+                } else {
+                    $('input[name="adminPassword"]').hide();
+                }
+            });
+        });
+        </script>
