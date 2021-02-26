@@ -21,7 +21,7 @@ router.post(
     function(req, res) {
         if (req.user.role == "notAdmin") {
             req.flash("success", "Welcome to SOSassist! " + req.user.username);
-            res.redirect("/");
+            res.redirect("/dashboard");
 
         } else if (req.user.role == "admin") {
             req.flash("success", "Welcome to SOSassist! " + req.user.username);
