@@ -21,7 +21,7 @@ router.post(
     function(req, res) {
         if (req.user.role == "notAdmin") {
             req.flash("success", "Welcome to SOSassist! " + req.user.username);
-            res.redirect("/");
+            res.redirect("/dashboard");
 
         } else if (req.user.role == "admin") {
             req.flash("success", "Welcome to SOSassist! " + req.user.username);
@@ -64,10 +64,10 @@ router.post("/signup", function(req, res) {
             phone: req.body.phone,
             email: req.body.email
         },
-        role: req.body.userRole,
     };
-    if (req.body.adminCode == process.env.ADMIN_SECRET_CODE) {
+    if (req.body.adminPassword == process.env.ADMIN_SECRET_CODE) {
         newUser.isAdmin = true;
+        newUser.role= "admin";
     };
     User.register(newUser, req.body.password, function(err, user) {
         if (err) {
@@ -77,7 +77,7 @@ router.post("/signup", function(req, res) {
             passport.authenticate("local")(req, res, function() {
                 req.flash("success", "Welcome to SOSassist " + user.username);
                 if (req.user.role == "notAdmin")
-                    res.redirect("/");
+                    res.redirect("/dashboard");
                 else if (req.user.role == "admin")
                     res.redirect("/");
                 else res.send(404);
