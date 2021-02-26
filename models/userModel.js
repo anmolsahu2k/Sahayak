@@ -21,8 +21,11 @@ const userSchema = new mongoose.Schema({
         phone: Number,
         email: String
     },
+    gender: String,
+    age: String,
     role: {type: String, default: "notAdmin"},
-    isAdmin : {type: Boolean, default: false}
+    isAdmin : {type: Boolean, default: false},
+    joinedAt:{type:Date, default:Date.now}
 });
 
 userSchema.plugin(passportLocalMongoose);
