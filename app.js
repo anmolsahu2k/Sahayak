@@ -11,6 +11,9 @@ let express  = require('express'),
 // importing enviroment variables
 require("dotenv").config();
 
+let multer = require('multer');
+ 
+
 // ------------Import User Model-----------//
 const User = require('./models/userModel');
 
@@ -18,7 +21,7 @@ const User = require('./models/userModel');
 let authRoutes = require('./routes/authRoutes'),
     indexRoutes = require('./routes/indexRoutes');
 
-mongoose.connect("mongodb://localhost:27017/sosassist", {
+mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     });
@@ -37,6 +40,7 @@ app.use(
     })
 );
 
+app.locals.moment = require('moment');
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(methodOverride("_method"));
