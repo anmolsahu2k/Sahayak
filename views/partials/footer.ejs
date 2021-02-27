@@ -85,10 +85,18 @@ crossorigin="anonymous">
 <script src="../stylesheets/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="../stylesheets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript">
-    function geoFindMe() {
+function geoFindMe() {
 
-  const status = document.querySelector('#status');
-  const mapLink = document.querySelector('#map-link');
+  let status, mapLink;
+  if(this.id == 'medicalSOS')
+  {
+    status = document.querySelector('#medicalStatus');
+    mapLink = document.querySelector('#medicalMapLink');
+  } else {
+     status = document.querySelector('#crimeStatus');
+     mapLink = document.querySelector('#crimeMapLink');
+  }
+  
 
   mapLink.href = '';
   mapLink.textContent = '';
@@ -117,7 +125,8 @@ https://www.google.com/maps/search/${latitude},+${longitude}/
 
 }
 
-document.querySelector('#find-me').addEventListener('click', geoFindMe);
+document.querySelector('#medicalSOS').addEventListener('click',geoFindMe);
+document.querySelector('#crimeSOS').addEventListener('click',geoFindMe);
 </script>
 
 </body>
