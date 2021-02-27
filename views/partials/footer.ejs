@@ -84,5 +84,40 @@ crossorigin="anonymous">
 
 <script src="../stylesheets/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="../stylesheets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+    function geoFindMe() {
+
+  const status = document.querySelector('#status');
+  const mapLink = document.querySelector('#map-link');
+
+  mapLink.href = '';
+  mapLink.textContent = '';
+
+  function success(position) {
+    const latitude  = position.coords.latitude;
+    const longitude = position.coords.longitude;
+
+    status.textContent = '';
+    //link to be shown on helpers device
+    mapLink.href = `https://www.google.com/maps/search/${latitude},+${longitude}/`;
+    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+  }
+https://www.google.com/maps/search/${latitude},+${longitude}/
+
+  function error() {
+    status.textContent = 'Unable to retrieve your location';
+  }
+
+  if(!navigator.geolocation) {
+    status.textContent = 'Geolocation is not supported by your browser';
+  } else {
+    status.textContent = 'Locating…';
+    navigator.geolocation.getCurrentPosition(success, error);
+  }
+
+}
+
+document.querySelectorAll('.find-me').addEventListener('click', geoFindMe);
+</script>
 
 </body>
