@@ -67,7 +67,7 @@ router.post("/signup", function(req, res) {
     };
     if (req.body.adminPassword == process.env.ADMIN_SECRET_CODE) {
         newUser.isAdmin = true;
-        newUser.role= "admin";
+        newUser.role = "admin";
     };
     User.register(newUser, req.body.password, function(err, user) {
         if (err) {
@@ -84,5 +84,16 @@ router.post("/signup", function(req, res) {
             });
         }
     });
+});
+
+
+// Forgot password
+router.get("/forgot", function(req, res) {
+    res.render("auth/forgot");
+});
+
+// Reset password
+router.get("/reset", function(req, res) {
+    res.render("auth/reset");
 });
 module.exports = router;

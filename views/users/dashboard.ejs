@@ -3,12 +3,6 @@
 <%-include('../partials/header')-%>
 
 <%-include('../partials/sideNav')-%>
-<style>
-    html{
-        overflow: hidden;
-    }
-</style>
-
 <main class="content">
 
             <%-include('../partials/topNav')-%>
@@ -57,7 +51,28 @@
             <div class="col-4 mb-4">
             	<div class="row">
             		 <div class="card shadow-sm p-0 mb-3">
-                    <div class="text-center mt-5"><button style="border-radius: 25px;" class="btn btn-danger btn-lg" type="button">Medical SOS</button></div>
+                    <div class="text-center mt-5"><button style="border-radius: 25px;" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" id="find-me" data-bs-target="#modal-medical">Medical SOS</button></div>
+                    
+                        <div class="modal fade" id="modal-medical" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="h6 modal-title">Do you want to proceed ?</h2>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h6>Your current location is :</h6> <p><p id = "status"></p><a id = "map-link" target="_blank"></a></p>
+                                        <h6>This message will be sent to the nearest person available for help:</h6>
+                                        <p>My name is <b><%=currentUser.name.firstName + " " + currentUser.name.lastName %></b>. I am in need of immediate medical help at the address <b><%=currentUser.permanentAddress.street%></b>. My contact no. is <b><%=currentUser.contact.phone%></b>.</p>
+                                    </div>
+                                    <div class="modal-footer align-items-center">
+                                        <button type="button" class="btn btn-primary">Modify</button>
+                                        <button type="button" class="btn btn-success">Accept</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div class="card-body pb-4">
                     	Request immediately for medical help from nearby users without waiting for professional services. Send help and get help from SOS Assist. Thank You for using the website.
                     </div>
@@ -65,7 +80,27 @@
             	</div>
             	<div class="row">
             		<div class="card shadow-sm p-0 mb-4">
-                    <div class="text-center mt-5"> <button  style="border-radius: 25px;" class="btn btn-lg btn-danger" type="button">Crime SOS</button></div>
+                    <div class="text-center mt-5"><button style="border-radius: 25px;" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#modal-crime">Crime SOS</button></div>
+                        <div class="modal fade" id="modal-crime" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h2 class="h6 modal-title">Do you want to proceed ?</h2>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <h6>Your current location is :</h6> <p><p id = "status"></p><a id = "map-link" target="_blank"></a></p>
+                                        <h6>This message will be sent to the nearest person available for help:</h6>
+                                        <p>My name is <b><%=currentUser.name.firstName + " " + currentUser.name.lastName %></b>. I am in need of immediate physical help related to a crime at the address <b><%=currentUser.permanentAddress.street%></b>. My contact no. is <b><%=currentUser.contact.phone%></b>.</p>
+                                    </div>
+                                    <div class="modal-footer align-items-center">
+                                        <button type="button" class="btn btn-primary">Modify</button>
+                                        <button type="button" class="btn btn-success">Accept</button>
+                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     <div class="card-body pb-4">
                     	Request immediately for physical help from nearby users without waiting for professional services. Send help and get help from SOS Assist.
                         <!-- <a class="btn btn-sm btn-dark me-2" href="#"><span class="fas fa-user-plus me-1"></span> Connect</a>
@@ -573,8 +608,6 @@
         </span>
     </div>
 </div> -->
-
-
 
 <%-include('../partials/footer')-%>
 </html>
