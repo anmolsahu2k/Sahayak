@@ -9,7 +9,9 @@ const requestSchema = new mongoose.Schema({
         },
         username: String,
     },
-    sourceLocation: String
+    sourceLocation: String,
+    message: String,
+
 })
 
 module.exports = mongoose.model("Requests", requestSchema)

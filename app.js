@@ -6,13 +6,11 @@ let express  = require('express'),
     LocalStrategy = require("passport-local"),
     methodOverride = require("method-override"),
     mongoose = require("mongoose"),
-    flash = require("connect-flash");
+    flash = require("connect-flash"),
+    multer = require('multer');
 
 // importing enviroment variables
 require("dotenv").config();
-
-let multer = require('multer');
- 
 
 // ------------Import User Model-----------//
 const User = require('./models/userModel');
@@ -27,6 +25,7 @@ mongoose.connect(process.env.MONGO_URL, {
     });
 
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.set("view engine", "ejs");
 app.use(express.static(path.join(__dirname + "/public")));
 

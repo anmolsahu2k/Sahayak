@@ -22,10 +22,14 @@ const userSchema = new mongoose.Schema({
         email: String
     },
     gender: String,
-    age: String,
+    age: Number,
     role: {type: String, default: "notAdmin"},
     isAdmin : {type: Boolean, default: false},
-    joinedAt:{type:Date, default:Date.now}
+    joinedAt:{type:Date, default:Date.now},
+    profileImage: {
+        data: {type: Buffer, default: null},
+        contentType: {type: String, default: null}
+    }
 });
 
 userSchema.plugin(passportLocalMongoose);

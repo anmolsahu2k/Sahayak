@@ -1,6 +1,9 @@
 const express = require("express"),
     router = express.Router(),
-    passport = require("passport");
+    passport = require("passport"),
+    fs = require('fs');
+
+let multer = require('multer');
 
 const User = require("../models/userModel");
 
@@ -96,4 +99,5 @@ router.get("/forgot", function(req, res) {
 router.get("/reset", function(req, res) {
     res.render("auth/reset");
 });
+
 module.exports = router;
