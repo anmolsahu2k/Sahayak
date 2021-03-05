@@ -67,6 +67,10 @@ router.post("/signup", function(req, res) {
             phone: req.body.phone,
             email: req.body.email
         },
+        // geoCoded: {
+        //     lat: 
+        //     long: 
+        // }
     };
     if (req.body.adminPassword == process.env.ADMIN_SECRET_CODE) {
         newUser.isAdmin = true;
