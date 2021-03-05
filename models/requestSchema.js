@@ -11,6 +11,7 @@ const requestSchema = new mongoose.Schema({
     },
     sourceLocation: String,
     message: String,
+    generatedAt: {type:Date, default:Date.now}
 
 })
 
