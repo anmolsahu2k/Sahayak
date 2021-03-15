@@ -1,7 +1,12 @@
 const express = require("express"),
     router = express.Router(),
     passport = require("passport"),
-    fs = require('fs');
+    fs = require('fs'),
+    nodemailer = require('nodemailer'),
+    bcrypt = require('bcrypt-nodejs'),
+    async = require('async'),
+    crypto = require('crypto');
+
 
 let multer = require('multer');
 
