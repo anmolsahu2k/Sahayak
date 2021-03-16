@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <%-include('../partials/header')-%>
+    <%-include('../partials/sideNav')-%>
+
+    <style>
+
+        body {
+            background-color: #F9FAFB;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        #activeMedical{
+            margin-bottom: 1rem;
+        }
+
+        .jumbotron{
+            padding: 5px;
+            background-color: rgba(173, 255, 47, 0.5);
+            color: black;
+            margin: 0.5rem;
+            width: 80%;
+            border:1px solid rgb(2, 71, 33)
+        }
+
+        .jumbotron > p {
+            margin: 0;
+        }
+
+        #timelineSection{
+            margin-top: 2rem;
+            margin-left: 2rem;
+        }
+    </style>
+
+    <main class="content">
+        <%-include('../partials/topNav')-%>
+
+        <ul><h3>Active SOS requests: </h3>
+            <ul id="activeMedical"><h5>Medical SOS requests:</h5>
+                <ul>
+                    <% if(foundRequests.length > 0){ %>
+                        <% foundRequests.forEach(function(request, i){ %>
+                            <% if(request.typeOfRequest == "Medical"){ %> 
+                                <li>
+                                    <div class="jumbotron">
+                                        <p> Genrated AT <%= request.generatedAt %> </p> 
+                                    </div>
+                                </li>
+                            <% } %>
+                        <% }); %>
+                    <% } else { %>
+                        <ul><p><strong>No SOS request found!!</strong></p></ul>
+                    <% } %> 
+                </ul>
+            </ul>
+            <ul><h5>Crime SOS requests:</h5>
+                <ul>
+                    <% if(foundRequests.length > 0){ %>
+                        <% foundRequests.forEach(function(request, i){ %>
+                            <% if(request.typeOfRequest == "Crime"){ %> 
+                                <li>
+                                    <div class="jumbotron">
+                                        <p> Genrated AT <%= request.generatedAt %>dolor sit amet, consectetur adipiscing elit. Etiam eget lacinia justo, eu posuere libero. Pellentesque interdum vel nunc consequat varius. Nullam eleifend egestas justo sed lacinia. Cras vitae ex pretium, scelerisque velit eget, sodales odio. Donec cursus massa lectus, non auctor lacus congue eu. Aliquam rhoncus quam vel augue hendrerit varius. Quisque nunc sem, congue quis nunc vel, feugiat hendrerit nulla. Aenean eget ex ut augue auctor cursus nec id urna. Vivamus eros velit, porta eget mattis nec, eleifend vel dui.
+
+                                        Nullam sit amet placerat erat. Praesent risus ipsum, vehicula nec pharetra sit amet, finibus sit amet</p>   
+                                    </div>
+                                </li>
+                            <% } %>
+                        <% }); %>
+                    <% } else { %>
+                        <ul><p><strong>No SOS request found!!</strong></p></ul>
+                    <% } %> 
+                </ul>
+            </ul>
+        </ul>
+
+        <div id="timelineSection">
+            <h3>Timeline</h3>
+        </div>
+
+    </main>
+    <div class="theme-settings card pt-2 collapse" id="theme-settings">
+    </div>
+
+    <%-include('../partials/footer')-%>
+</html>
