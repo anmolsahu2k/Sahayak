@@ -22,13 +22,11 @@ router.get("/dashboard/settings", middleware.isLoggedIn, function(req, res) {
 });
 
 router.get("/dashboard/activityLog", middleware.isLoggedIn, function(req, res){
-    console.log(req.user._id);
     Request.find().where('handler.id').equals(req.user._id).exec(function(err, foundRequests){
         if(err){
             req.flash("error", "Something Bad Happened!")
             console.log(err);
         }else{
-            console.log(foundRequests);
             res.render("users/activityLog", {foundRequests: foundRequests});
         }
     });
