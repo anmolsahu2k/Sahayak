@@ -31,7 +31,8 @@ const userSchema = new mongoose.Schema({
         contentType: {type: String, default: null}
     },
     medicalRequestCount: {type: Number, default: 0},
-    crimeRequestCount: {type: Number, default: 0}
+    crimeRequestCount: {type: Number, default: 0},
+    trustScore: {type: Number, default: 0};
 });
 
 userSchema.plugin(passportLocalMongoose);
