@@ -63,10 +63,10 @@ router.post("/signup", function(req, res) {
     request('https://maps.googleapis.com/maps/api/geocode/json?address=' + req.body.street + ' ' + req.body.city + '&key=' + process.env.GOOGLE_MAPS_API_KEY, (error, response, body) => { //function(error, response, body)
         if (!error && response.statusCode == 200) {
             var parsedData = JSON.parse(body); //to convert data from string to javascript object
-            console.log(parsedData.results[0].geometry.location.lat);
+            // console.log(parsedData.results[0].geometry.location.lat);
             latitude = parsedData.results[0].geometry.location.lat;
             longitude = parsedData.results[0].geometry.location.lng;
-            console.log(req.body.street + ' ' + req.body.city);
+            // console.log(req.body.street + ' ' + req.body.city);
             const newUser = {
                 name: {
                     firstName: req.body.firstName,
