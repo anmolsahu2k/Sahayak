@@ -18,8 +18,11 @@
   "homepage": "https://github.com/Pro-Abhinav/SOS-Assist#readme",
   "dependencies": {
     "-": "0.0.1",
+    "async": "^3.2.0",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.19.0",
     "connect-flash": "^0.1.1",
+    "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
