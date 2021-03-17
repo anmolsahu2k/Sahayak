@@ -11,12 +11,12 @@
                     <div class="col-12 d-flex align-items-center justify-content-center">
                         <div class="bg-white shadow-soft border rounded border-light p-4 p-lg-5 w-100 fmxw-500">
                             <h1 class="h3 mb-4">Reset password</h1>
-                            <form action="#">
+                            <form action="/reset" method="POST">
                                 <!-- Form -->
                                 <div class="mb-4">
-                                    <label for="email">Your Email</label>
+                                    <label for="username">Your Username</label>
                                     <div class="input-group">
-                                        <input type="email" class="form-control" placeholder="example@company.com" id="email" required disabled>
+                                        <input type="username" class="form-control" placeholder="example123" id="username" name="userId" required>
                                     </div>  
                                 </div>
                                 <!-- End of Form -->
@@ -25,7 +25,7 @@
                                     <label for="password">Your Password</label>
                                     <div class="input-group">
                                         <span class="input-group-text" id="basic-addon4"><span class="fas fa-unlock-alt"></span></span>
-                                        <input type="password" placeholder="Password" class="form-control" id="password" required autofocus>
+                                        <input type="password" placeholder="Password" class="form-control" id="password" name="password" required autofocus>
                                     </div>  
                                 </div>
                                 <!-- End of Form -->
