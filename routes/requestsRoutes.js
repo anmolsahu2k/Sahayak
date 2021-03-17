@@ -41,21 +41,33 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req,res
 
 //-----------Close request routes------------------//
 router.get("/dashboard/activity/close/:id", function(req, res){
-   Request.findByIdAndUpdate(req.params.id, {$set: {'currentStatus': 'Inactive'}}, function(err, updatedRequest){
-        if(err){
-            req.flash("error", "Something went wrong!");
-            console.log(err);
-        }else{
-            User.findByIdAndUpdate({_id: req.user._id}, {$inc: { medicalRequestCount:-1 } },  function(error, updatedUser){
-                if(error){
-                    console.log(error);
-                }else{
-                    req.flash("success", "SOS Request Closed Successfully!")
-                    res.redirect("/dashboard/activityLog");
+    var datetime = new Date();
+    Request.findByIdAndUpdate(req.params.id, {$set: {'currentStatus': 'Inactive'}}, function(err, updatedRequest){
+            if(err){
+                req.flash("error", "Something went wrong!");
+                console.log(err);
+            }else{
+                closeTime = (datetime-updatedRequest.generatedAt)/(1000*60);
+                let trustScoreChange;
+                if(closeTime < 10){
+                    trustScoreChange = -10;
+                }else if(closeTime < 60 && closeTime > 10){
+                    trustScoreChange = -5;
+                } else if(closeTime < 90 && closeTime > 60){
+                    trustScoreChange = -2;
+                }else {
+                    trustScoreChange = 0;
                 }
-            });
-        }
-   });
+                User.findByIdAndUpdate({_id: req.user._id}, {$inc: { medicalRequestCount:-1, trustScore: trustScoreChange} },  function(error, updatedUser){
+                    if(error){
+                        console.log(error);
+                    }else{
+                        req.flash("success", "SOS Request Closed Successfully!")
+                        res.redirect("/dashboard/activityLog");
+                    }
+                });
+            }
+    });
 });
 
 module.exports = router;
