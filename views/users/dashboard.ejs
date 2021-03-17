@@ -30,17 +30,31 @@
                 <div class="profile-cover rounded-top" data-background="../assets/img/profile-cover.jpg"></div>
                 <div class="card-body pb-5">
                     <img src="../assets/img/team/profile-picture-1.jpg" class="user-avatar large-avatar rounded-circle mx-auto mt-n7 mb-4" alt="Neil Portrait">
-                    <h4 class="h3 text-center"><%= currentUser.name.firstName + " " + currentUser.name.lastName %></h4>
+                    <div style="justify-content: center; text-align: center; margin-bottom: 1rem;">
+                        <h4 class="h3 text-center" style="display: inline-flex;"><%= currentUser.name.firstName + " " + currentUser.name.lastName %></h4>
+                        <div id= "trustScore" class="col-md-6" style="display: inline-flex; background-color: greenyellow; border-radius: 50%;width: 70px;
+                            height: 70px; text-align: center; margin: auto 1rem; line-height: 70px; font-size: 2rem;">
+                            <%= currentUser.trustScore %>
+                            <!-- <label style="font-size: 1rem; width: 300px; text-align: center;"for="trustScore">Trust Score</label> -->
+                        </div>
+                    </div>
                     <div class="row">
-                        <div class="col-6">
-                            <p class="text-gray mb-4"><strong>Joined On: </strong> <%= moment(currentUser.joinedAt).format('MMMM YYYY')%>  </p>
-                            <p class="text-gray mb-4"><strong>Phone number: </strong> <%= currentUser.contact.phone %></p>
-                            <p class="text-gray mb-4"><strong>Email: </strong> <%= currentUser.contact.email %></p>
+                        <div class="row">
+                            <div class="col-md-6" style="display: inline-flex;">
+                                <p class="text-gray mb-4"><strong>Joined On: </strong> <%= moment(currentUser.joinedAt).format('MMMM YYYY')%>  </p>
+                            </div>
+                            <div class="col-md-6" style="display: inline-flex;">
+                                <p class="text-gray mb-4"><strong>Permanent Address: </strong> <br> <%= currentUser.permanentAddress.street + ', ' + currentUser.permanentAddress.city + ', ' + currentUser.permanentAddress.state + ', ' + currentUser.permanentAddress.zip%> </p>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <p class="text-gray mb-4"><strong>Permanent Address: </strong> <br> <%= currentUser.permanentAddress.street + ', ' + currentUser.permanentAddress.city + ', ' + currentUser.permanentAddress.state + ', ' + currentUser.permanentAddress.zip%> </p>
-                        </div>
-                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p class="text-gray mb-4"><strong>Phone number: </strong> <%= currentUser.contact.phone %></p>
+                            </div>
+                            <div class="col-md-6">
+                                <p class="text-gray mb-4"><strong>Email: </strong> <%= currentUser.contact.email %></p>
+                            </div> 
+                        </div> 
                         <div class="row">
                             <div class="col-md-6">
                                 <p>Active Medical SOS count: <strong> <%= currentUser.medicalRequestCount  %></strong></p>
@@ -75,8 +89,8 @@
                                         <h6>This message will be sent to the people inside 1km radius from your current location:</h6>
                                         <textarea name="message" id="msg" cols="55" rows="5" style="border-radius: 10px;padding: 3px;">My name is <%=currentUser.name.firstName + " " + currentUser.name.lastName %>.&#10;I am in need of immediate medical help at the address "current Address". 
                                         </textarea>
-                                        <p style="color: green;">#Modify the above text if you want to.</p>
-                                        <p style="color: red;">*Your Phone number will be shown only when receiver accepts your SOS call</p>
+                                        <p style="color: rgb(199, 33, 33);">#Your Trust Score will have adverse effects if fake SOS is genreated.</p>
+                                        <p style="color: green;">*Your Phone number will be shown only when receiver accepts your SOS call</p>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="submit" class="btn btn-success">Send</button>
@@ -101,16 +115,54 @@
                                         <h2 class="h6 modal-title">Do you want to proceed ?</h2>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <h6>Your current location is :</h6> <p><p id = "crimeStatus"></p><a id = "crimeMapLink" target="_blank"></a></p>
-                                        <h6>This message will be sent to the nearest person available for help:</h6>
-                                        <p>My name is <b><%=currentUser.name.firstName + " " + currentUser.name.lastName %></b>. I am in need of immediate physical help related to a crime at the address <b><%=currentUser.permanentAddress.street%></b>. My contact no. is <b><%=currentUser.contact.phone%></b>.</p>
-                                    </div>
-                                    <div class="modal-footer align-items-center">
-                                        <button type="button" class="btn btn-primary">Modify</button>
-                                        <button type="button" class="btn btn-success">Accept</button>
-                                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
-                                    </div>
+                                    <form action="/request/send/crime/<%= currentUser._id %>" method="POST">
+                                        <div class="modal-body">
+                                            <h6>Your current location is :</h6> <p><p id = "crimeStatus"></p><a id = "crimeMapLink" target="_blank"></a></p>
+                                            <h6>This message will be sent to the people inside 1km radius from your current location:</h6>
+                                            <textarea name="message" id="msg" cols="55" rows="5" style="border-radius: 10px;padding: 3px;">My name is <%=currentUser.name.firstName + " " + currentUser.name.lastName %>.&#10;I am in need of immediate medical help at the address "current Address". 
+                                            </textarea>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                                                        <label class="form-check-label" for="defaultCheck10">
+                                                            Kidnapping
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                                                        <label class="form-check-label" for="defaultCheck10">
+                                                            Theft
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                                                        <label class="form-check-label" for="defaultCheck10">
+                                                            Criminal is armed.
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="checkbox" value="" id="defaultCheck10">
+                                                        <label class="form-check-label" for="defaultCheck10">
+                                                            Multiple criminals.
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <p style="color: rgb(199, 33, 33);">#Your Trust Score will have adverse effects if fake SOS is genreated.</p>
+                                            <p style="color: green;">*Your Phone number will be shown only when receiver accepts your SOS call</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="submit" class="btn btn-success">Send</button>
+                                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>
