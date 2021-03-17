@@ -2,10 +2,18 @@ const express = require("express"),
     router = express.Router(),
     passport = require("passport"),
     fs = require('fs'),
+<<<<<<< Updated upstream
     nodemailer = require('nodemailer'),
     bcrypt = require('bcrypt-nodejs'),
     async = require('async'),
     crypto = require('crypto');
+=======
+    nodemailer = require('nodemailer');
+middleware = require("../middlewares/authMiddlewares");
+
+
+// randomToken = require('random-token');
+>>>>>>> Stashed changes
 
 
 let multer = require('multer');
@@ -104,9 +112,137 @@ router.get("/forgot", function(req, res) {
     res.render("auth/forgot");
 });
 
+<<<<<<< Updated upstream
 // Reset password
 router.get("/reset", function(req, res) {
     res.render("auth/reset");
 });
 
+=======
+router.post("/forgot", function(req, res) {
+    user.resetPasswordToken = token;
+    user.resetPasswordExpires = Date.now() + 3600000;
+
+    const resetEmail = {
+        to: user.email,
+        from: 'passwordreset@example.com',
+        subject: 'Node.js Password Reset',
+        text: `
+      You are receiving this because you (or someone else) have requested the reset of the password for your account.
+      Please click on the following link, or paste this into your browser to complete the process:
+      http://${req.headers.host}/reset/${token}
+      If you did not request this, please ignore this email and your password will remain unchanged.
+    `,
+    };
+    const emailServerDetails = {
+        emailId: process.env.SERVER_EMAIL,
+        pass: process.env.SERVER_PASSWORD,
+        proxy: ''
+    }
+    var mailid1 = emailServerDetails.emailId;
+    var password = emailServerDetails.pass;
+    var mailid = '"Admin" <' + mailid1 + '>';
+    var proxy = emailServerDetails.proxy;
+    var serverproxy = "https://" + proxy;
+
+
+    User.findOne({ username: req.body.userId }, function(err, result2) {
+        var TO = result2.contact.email;
+        if (err) throw err;
+        if (result2.length != 0) {
+            var pass = "thisispassword";
+            var output = `
+                            <p>Dear User, </p>
+                            <p>Your are receiving this email because you had requested to reset your password.</p>
+                            <p>Your new password has been generated. Please login using the given new password.</p>
+                            <ul>
+                                <li>Email ID: ` + result2.contact.email + `</li>
+                                <li>Password: ` + pass + `</li>
+                            </ul>
+                            <p>Login Link: <a href="http://localhost:3000/login">LOGIN</a></p>
+                            <p>You may change your password after you login under the section - ACCOUNT SETTINGS</p>
+                            <p><strong>This is an automatically generated mail. Please do not reply back.</strong></p>
+
+                            <p>Regards,</p>
+                            <p>H Manager</p>
+                        `;
+            var transporter = nodemailer.createTransport({
+                service: 'gmail.com',
+                port: 567,
+                secure: false, // true for 465, false for other ports
+                // proxy: serverproxy,
+                auth: {
+                    user: mailid1, // generated ethereal user
+                    pass: password // generated ethereal password
+                },
+                tls: {
+                    rejectUnauthorized: false
+                }
+            });
+
+            // setup email data with unicode symbols
+            var mailOptions = {
+                from: mailid, // sender address
+                to: TO, // list of receivers
+                subject: 'Password Reset', // Subject line
+                text: 'Password has been reset', // plain text body
+                html: output // html body
+            };
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                    return console.log(error);
+                }
+                console.log('Message sent: %s', info.messageId);
+                // Preview only available when sending through an Ethereal account
+                console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+                // bcrypt.hash(pass, saltRounds, function (err, hash) {
+                //     User.changePassword(userid, hash);
+                // });
+
+                // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
+                // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
+            });
+            transporter.verify(function(error, success) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log("Server is ready to take our messages");
+                }
+            });
+        }
+
+    });
+})
+
+// Reset password
+router.get("/reset", middleware.isLoggedIn, function(req, res) {
+
+    res.render("auth/reset");
+});
+
+router.post("/reset", function(req, res) {
+    console.log(req.body);
+    User.register(newUser, req.body.password, function(err, user) {
+        if (err) {
+            console.log(err);
+            res.redirect("/signup");
+        } else {
+            passport.authenticate("local")(req, res, function() {
+                req.flash("success", "Welcome to SOSassist " + user.username);
+                if (req.user.role == "notAdmin")
+                    res.redirect("/dashboard");
+                else if (req.user.role == "admin")
+                    res.redirect("/");
+                else res.send(404);
+            });
+        }
+    });
+
+});
+
+
+
+
+>>>>>>> Stashed changes
 module.exports = router;
