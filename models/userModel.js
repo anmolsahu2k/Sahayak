@@ -36,7 +36,7 @@ const userSchema = new mongoose.Schema({
     },
     medicalRequestCount: { type: Number, default: 0 },
     crimeRequestCount: { type: Number, default: 0 },
-    trustScore: { type: Number, default: 0 }
+    trustScore: { type: Number, default: 50 }
 });
 
 userSchema.plugin(passportLocalMongoose);
