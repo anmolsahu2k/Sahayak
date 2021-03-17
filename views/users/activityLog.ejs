@@ -52,7 +52,29 @@
                                 <li>
                                     <div class="jumbotron">
                                         <p> Genrated AT <%= request.generatedAt %> </p>
-                                        <a href="/dashboard/activity/close/<%=request._id%>" class="btn btn-danger btn-sm">Close This Request</a>
+                                        <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#modal-close">Close This Request!</button>
+                                        <!-- Modal Content Medical-->
+                                        <div class="modal fade" id="modal-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
+                                            <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+                                                <div class="modal-content bg-gradient-primary">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title" id="modal-title-notification" style="margin-left: auto; color: white; text-align: center !important;">Confirmation</h3>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="py-3 text-center">
+                                                            <span class="modal-icon display-1-lg" style="color: red"><i class="fas fa-exclamation"></i></span></span>
+                                                            <p style="color: white;">Reqeust Generated at <%= request.generatedAt.toLocaleTimeString(); %> </p>
+                                                            <p style="color: white;">Do you want to close this request?</p>
+                                                            <p style="color: rgb(248, 95, 95)">*Closing this request too soon may affect your Trust Score.</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a href="/dashboard/activity/close/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End of Modal Content -->
                                     </div>
                                 </li>
                             <% } %>
@@ -70,10 +92,31 @@
                                 <% crimeCount++ %>
                                 <li>
                                     <div class="jumbotron">
-                                        <p> Genrated AT <%= request.generatedAt %>dolor sit amet, 
-                                            consectetur adipiscing elit. Etiam eget lacinia justo, eu posuere libero. Pellentesque interdum vel nunc consequat varius. Nullam eleifend egestas justo sed lacinia. Cras vitae ex pretium, scelerisque velit eget, sodales odio. Donec cursus massa lectus, non auctor lacus congue eu. Aliquam rhoncus quam vel augue hendrerit varius. Quisque nunc sem, congue quis nunc vel, feugiat hendrerit nulla. Aenean eget ex ut augue auctor cursus nec id urna. Vivamus eros velit, porta eget mattis nec, eleifend vel dui.
-                                            Nullam sit amet placerat erat. Praesent risus ipsum, vehicula nec pharetra sit amet, finibus sit amet</p>   
-                                    </div>
+                                        <p> Genrated AT <%= request.generatedAt %>
+                                            <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#modal-close">Close This Request!</button>
+                                            <!-- Modal Content Crime -->
+                                            <div class="modal fade" id="modal-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
+                                                <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+                                                    <div class="modal-content bg-gradient-primary">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title" id="modal-title-notification" style="margin-left: auto; color: white; text-align: center !important;">Confirmation</h3>
+                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            <div class="py-3 text-center">
+                                                                <span class="modal-icon display-1-lg" style="color: red"><i class="fas fa-exclamation"></i></span></span>
+                                                                <h2 class="h4 modal-title my-3">Important message!</h2>
+                                                                <p style="color: white;">Do you want to close this request?</p>
+                                                                <p style="color: rgb(248, 95, 95)">*Closing this request will decrease your reputation by 5</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <a href="/dashboard/activity/close/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- End of Modal Content -->
+                                   </div>
                                 </li>
                             <% } %>
                         <% }); %>
