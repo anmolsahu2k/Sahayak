@@ -6,6 +6,7 @@ const path = require('path');
 let multer = require('multer');
 const middleware = require("../middlewares/authMiddlewares");
 const User = require("../models/userModel");
+const Request = require("../models/requestSchema");
 
 
 router.get("/", function(req, res) {
@@ -18,6 +19,17 @@ router.get("/dashboard", middleware.isLoggedIn, function(req, res) {
 
 router.get("/dashboard/settings", middleware.isLoggedIn, function(req, res) {
     res.render("users/settings");
+});
+
+router.get("/dashboard/activityLog", middleware.isLoggedIn, function(req, res){
+    Request.find().where('handler.id').equals(req.user._id).exec(function(err, foundRequests){
+        if(err){
+            req.flash("error", "Something Bad Happened!")
+            console.log(err);
+        }else{
+            res.render("users/activityLog", {foundRequests: foundRequests});
+        }
+    });
 });
 
 const upload = multer({dest: __dirname + '/uploads/images'});

@@ -7,7 +7,11 @@ let express  = require('express'),
     methodOverride = require("method-override"),
     mongoose = require("mongoose"),
     flash = require("connect-flash"),
-    multer = require('multer');
+    multer = require('multer'),
+    nodemailer = require('nodemailer'),
+    bcrypt = require('bcrypt-nodejs'),
+    async = require('async'),
+    crypto = require('crypto');
 
 // importing enviroment variables
 require("dotenv").config();
@@ -17,11 +21,13 @@ const User = require('./models/userModel');
 
 // ------------Import Routes--------------//
 let authRoutes = require('./routes/authRoutes'),
-    indexRoutes = require('./routes/indexRoutes');
+    indexRoutes = require('./routes/indexRoutes'),
+    requestRoutes = require('./routes/requestsRoutes');
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false
     });
 
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -60,6 +66,7 @@ app.use(function (req, res, next) {
 // ---------Use external Routes-------------// 
 app.use(indexRoutes);
 app.use(authRoutes);
+app.use(requestRoutes);
 
 app.listen(process.env.APP_LISTEN_PORT, function(){
     console.log("Server is connected");
