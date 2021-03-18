@@ -75,6 +75,7 @@
         <div class="col-4 mb-4">
             <div class="row">
                 <div class="card shadow-sm p-0 mb-3">
+                    <% if(currentUser.trustScore > 10) { %>
                     <div class="text-center mt-5 "><button style="border-radius: 25px;" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" id="medicalSOS" data-bs-target="#modal-medical">Medical SOS</button></div>
                     <div class="modal fade" id="modal-medical" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -139,10 +140,22 @@
                     <div class="card-body pb-4">
                         Request immediately for medical help from nearby users without waiting for professional services. Send help and get help from SOS Assist. Thank You for using the website.
                     </div>
+                    <% } else { %> 
+                        <!-- Button Modal -->
+                        <div class="text-center mt-5 " style="cursor: not-allowed;"><button style="border-radius: 25px; pointer-events: none; opacity: 0.6;" type="button" class="btn btn-danger btn-lg disabled" data-bs-toggle="modal" id="medicalSOS" data-bs-target="#modal-medical-notification">Medical SOS</button></div>
+                        <div class="card-body pb-4">
+                            <p style="color: rgb(241, 13, 13);">
+                                You are <strong>NOT ALLOWED</strong> to make any medical SOS requst as your Trust Score is too low.
+                                <br>
+                                Trust Score must be higher than 10 for requesting medical assistance.
+                            </p>
+                        </div>
+                    <% } %>
                 </div>
             </div>
             <div class="row">
                 <div class="card shadow-sm p-0 mb-4">
+                    <% if(currentUser.trustScore > 20) { %>
                     <div class="text-center mt-5"><button style="border-radius: 25px;" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#modal-crime" id="crimeSOS">Crime SOS</button></div>
                         <div class="modal fade" id="modal-crime" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal-dialog-centered" role="document">
@@ -207,6 +220,24 @@
                     <div class="card-body pb-4">
                     	Request immediately for physical help from nearby users without waiting for professional services. Send help and get help from SOS Assist.
                     </div>
+                    <% } else { %> 
+                        <!-- Button Modal -->
+                        <div class="text-center mt-5 " style="cursor: not-allowed;">
+                            <button 
+                                style="border-radius: 25px; pointer-events: none; opacity: 0.6;" 
+                                type="button" 
+                                class="btn btn-danger btn-lg disabled">
+                                    Crime SOS
+                            </button>
+                        </div>
+                        <div class="card-body pb-4">
+                            <p style="color: rgb(241, 13, 13);">
+                                You are <strong>NOT ALLOWED</strong> to make any crime SOS requst as your Trust Score is too low.
+                                <br>
+                                Trust Score must be higher than 20 for requesting medical assistance.
+                            </p>
+                        </div>
+                    <% } %>
                 </div>
             </div>     
         </div>

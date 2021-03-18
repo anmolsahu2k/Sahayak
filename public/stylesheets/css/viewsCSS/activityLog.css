@@ -1,0 +1,30 @@
+body {
+    background-color: #F9FAFB;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+#activeMedical{
+    margin-bottom: 1rem;
+}
+
+.jumbotron{
+    padding: 5px;
+    background-color: #CDEDE4;
+    color: black;
+    margin: 0.5rem;
+    width: 80%;
+    border:1px solid rgb(110, 207, 154)
+}
+
+.jumbotron > p {
+    margin: 0;
+}
+
+.timeline{
+    margin-top: 2rem;
+    margin-left: 2rem;
+}
