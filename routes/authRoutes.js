@@ -78,9 +78,6 @@ router.post("/signup", function(req, res) {
                     state: req.body.state,
                     zip: req.body.zip
                 },
-                currentAddress: {
-                    location: req.body.currentAddress
-                },
                 username: req.body.username,
                 contact: {
                     phone: req.body.phone,
