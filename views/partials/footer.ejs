@@ -90,15 +90,21 @@ crossorigin="anonymous">
     ></script>
 <script type="text/javascript">
 function geoFindMe() {
+  let latitude, longitude; 
 
   let status, mapLink;
+  let dashLatitude, dashLongitude;
   if(this.id == 'medicalSOS')
   {
     status = document.querySelector('#medicalStatus');
     mapLink = document.querySelector('#medicalMapLink');
+    dashLatitude = document.querySelector('#medicalLatitude');
+    dashLongitude = document.querySelector('#medicalLongitude');
   } else {
      status = document.querySelector('#crimeStatus');
      mapLink = document.querySelector('#crimeMapLink');
+     dashLatitude = document.querySelector('#crimeLatitude');
+     dashLongitude = document.querySelector('#crimeLongitude');
   }
   
 
@@ -106,8 +112,10 @@ function geoFindMe() {
   mapLink.textContent = '';
 
   function success(position) {
-    const latitude  = position.coords.latitude;
-    const longitude = position.coords.longitude;
+    latitude  = position.coords.latitude;
+    longitude = position.coords.longitude;
+    dashLatitude.value=latitude;
+    dashLongitude.value=longitude;
 
     status.textContent = '';
     const geocoder = new google.maps.Geocoder();
