@@ -1,59 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <%-include('../partials/header')-%>
-    <%-include('../partials/sideNav')-%>
+<%-include('../partials/header')-%>
+<%-include('../partials/sideNav')-%>
+<link rel="stylesheet" href="/stylesheets/css/viewsCSS/activityLog.css">
 
-    <style>
+<main class="content">
+    <%-include('../partials/topNav')-%>
 
-        body {
-            background-color: #F9FAFB;
-        }
-
-        input::-webkit-outer-spin-button,
-        input::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        #activeMedical{
-            margin-bottom: 1rem;
-        }
-
-        .jumbotron{
-            padding: 5px;
-            background-color: #CDEDE4;
-            color: black;
-            margin: 0.5rem;
-            width: 80%;
-            border:1px solid rgb(110, 207, 154)
-        }
-
-        .jumbotron > p {
-            margin: 0;
-        }
-
-        .timeline{
-            margin-top: 2rem;
-            margin-left: 2rem;
-        }
-    </style>
-
-    <main class="content">
-        <%-include('../partials/topNav')-%>
-
-        <ul><h3>Active SOS requests: </h3>
-            <ul id="activeMedical"><h5>Medical SOS requests:</h5>
-                <ul>
-                    <% crimeCount=0, medicalCount = 0 %>
-                    <% if(foundRequests.length > 0){ %>
-                        <% foundRequests.forEach(function(request, i){ %>
-                            <% if(request.typeOfRequest == "Medical" && request.currentStatus == "Active"){ %> 
-                                <% medicalCount++ %>
-                                <li>
-                                    <div class="jumbotron">
-                                        <p> Genrated AT <%= request.generatedAt %> </p>
-                                        <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#modal-close">Close This Request!</button>
-                                        <!-- Modal Content Medical-->
+    <ul><h3>Active SOS requests: </h3>
+        <ul id="activeMedical"><h5>Medical SOS requests:</h5>
+            <ul>
+                <% crimeCount=0, medicalCount = 0 %>
+                <% if(foundRequests.length > 0){ %>
+                    <% foundRequests.forEach(function(request, i){ %>
+                        <% if(request.typeOfRequest == "Medical" && request.currentStatus == "Active"){ %> 
+                            <% medicalCount++ %>
+                            <li>
+                                <div class="jumbotron">
+                                    <p> Genrated AT <%= request.generatedAt %> </p>
+                                    <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#modal-close">Close This Request!</button>
+                                    <!-- Modal Content Medical-->
+                                    <div class="modal fade" id="modal-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
+                                        <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+                                            <div class="modal-content bg-gradient-primary">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="modal-title-notification" style="margin-left: auto; color: white; text-align: center !important;">Confirmation</h3>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="py-3 text-center">
+                                                        <span class="modal-icon display-1-lg" style="color: red"><i class="fas fa-exclamation"></i></span></span>
+                                                        <p style="color: white;">Reqeust Generated at <%= request.generatedAt.toLocaleTimeString(); %> </p>
+                                                        <p style="color: white;">Do you want to close this request?</p>
+                                                        <p style="color: rgb(248, 95, 95)">*Closing this request too soon may affect your Trust Score.</p>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <a href="/dashboard/activity/medicalClose/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- End of Modal Content -->
+                                </div>
+                            </li>
+                        <% } %>
+                    <% }); %>
+                <% } if(medicalCount == 0 ){ %>
+                    <ul><p><strong>No SOS request found!!</strong></p></ul>
+                <% } %> 
+            </ul>
+        </ul>
+        <ul><h5>Crime SOS requests:</h5>
+            <ul>
+                <% if(foundRequests.length - medicalCount > 0){ %>
+                    <% foundRequests.forEach(function(request, i){ %>
+                        <% if(request.typeOfRequest == "Crime" && request.currentStatus == "Active"){ %>
+                            <% crimeCount++ %>
+                            <li>
+                                <div class="jumbotron">
+                                    <p> Genrated AT <%= request.generatedAt %>
+                                        <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" style="display: block;" data-bs-target="#modal-close">Close This Request!</button>
+                                        <!-- Modal Content Crime -->
                                         <div class="modal fade" id="modal-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
                                             <div class="modal-dialog modal-info modal-dialog-centered" role="document">
                                                 <div class="modal-content bg-gradient-primary">
@@ -64,76 +72,34 @@
                                                     <div class="modal-body">
                                                         <div class="py-3 text-center">
                                                             <span class="modal-icon display-1-lg" style="color: red"><i class="fas fa-exclamation"></i></span></span>
-                                                            <p style="color: white;">Reqeust Generated at <%= request.generatedAt.toLocaleTimeString(); %> </p>
                                                             <p style="color: white;">Do you want to close this request?</p>
-                                                            <p style="color: rgb(248, 95, 95)">*Closing this request too soon may affect your Trust Score.</p>
+                                                            <p style="color: rgb(248, 95, 95)">*Closing SOS request too soon may decrease your Trust Score.</p>
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a href="/dashboard/activity/medicalClose/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
+                                                        <a href="/dashboard/activity/crimeClose/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <!-- End of Modal Content -->
-                                    </div>
-                                </li>
-                            <% } %>
-                        <% }); %>
-                    <% } if(medicalCount == 0 ){ %>
-                        <ul><p><strong>No SOS request found!!</strong></p></ul>
-                    <% } %> 
-                </ul>
-            </ul>
-            <ul><h5>Crime SOS requests:</h5>
-                <ul>
-                    <% if(foundRequests.length - medicalCount > 0){ %>
-                        <% foundRequests.forEach(function(request, i){ %>
-                            <% if(request.typeOfRequest == "Crime" && request.currentStatus == "Active"){ %>
-                                <% crimeCount++ %>
-                                <li>
-                                    <div class="jumbotron">
-                                        <p> Genrated AT <%= request.generatedAt %>
-                                            <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" style="display: block;" data-bs-target="#modal-close">Close This Request!</button>
-                                            <!-- Modal Content Crime -->
-                                            <div class="modal fade" id="modal-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
-                                                <div class="modal-dialog modal-info modal-dialog-centered" role="document">
-                                                    <div class="modal-content bg-gradient-primary">
-                                                        <div class="modal-header">
-                                                            <h3 class="modal-title" id="modal-title-notification" style="margin-left: auto; color: white; text-align: center !important;">Confirmation</h3>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="py-3 text-center">
-                                                                <span class="modal-icon display-1-lg" style="color: red"><i class="fas fa-exclamation"></i></span></span>
-                                                                <h2 class="h4 modal-title my-3">Important message!</h2>
-                                                                <p style="color: white;">Do you want to close this request?</p>
-                                                                <p style="color: rgb(248, 95, 95)">*Closing this request will decrease your reputation by 5</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <a href="/dashboard/activity/crimeClose/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <!-- End of Modal Content -->
-                                   </div>
-                                </li>
-                            <% } %>
-                        <% }); %>
-                    <% } if(crimeCount == 0){ %>
-                        <ul><p><strong>No SOS request found!!</strong></p></ul>
-                    <% } %> 
-                </ul>
+                                </div>
+                            </li>
+                        <% } %>
+                    <% }); %>
+                <% } if(crimeCount == 0){ %>
+                    <ul><p><strong>No SOS request found!!</strong></p></ul>
+                <% } %> 
             </ul>
         </ul>
+    </ul>
 
-        <div class="timeline">
-            <h3>Timeline</h3>
-        </div>
-
-    </main>
-    <div class="theme-settings card pt-2 collapse" id="theme-settings">
+    <div class="timeline">
+        <h3>Timeline</h3>
     </div>
 
-    <%-include('../partials/footer')-%>
+</main>
+<div class="theme-settings card pt-2 collapse" id="theme-settings">
+</div>
+
+<%-include('../partials/footer')-%>
 </html>
