@@ -9,10 +9,13 @@ const requestSchema = new mongoose.Schema({
         },
         username: String,
     },
-    sourceLocation: String,
+    sourceLocation: {
+        lat: String,
+        long: String
+    },
     message: String,
-    generatedAt: {type:Date, default:Date.now},
-    currentStatus: {type: String, default: "Active"}
+    generatedAt: { type: Date, default: Date.now },
+    currentStatus: { type: String, default: "Active" }
 
 })
 
