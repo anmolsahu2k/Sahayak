@@ -41,9 +41,44 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
     }
     // console.log(req.body);
 });
+//----------Send Crime SOS reqeust----------//
+router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res) {
+    let newRequest = {
+        typeOfRequest: "Crime",
+        handler: {
+            id: req.params.id,
+            username: req.user.username,
+        },
+        sourceLocation: {
+            lat: req.body.latitude,
+            long: req.body.longitude
+        },
+        message: req.body.message,
+    }
+    if (req.user.crimeRequestCount < 3) {
+        Request.create(newRequest, function(err, newRequest) {
+            if (err) {
+                console.log(err);
+            } else {
+                User.findByIdAndUpdate({ _id: req.params.id }, { $inc: { crimeRequestCount: 1 } }, function(error, updatedUser) {
+                    if (error) {
+                        console.log(error);
+                    } else {
+                        req.flash("success", "Crime SOS Request Sent!");
+                        res.redirect("/dashboard");
+                    }
+                });
+            }
+        });
+    } else {
+        req.flash("error", "Maximum limit of sending Crime SOS is reached !");
+        res.redirect("/dashboard");
+    }
+    // console.log(req.body);
+});
 
-//-----------Close request routes------------------//
-router.get("/dashboard/activity/close/:id", function(req, res) {
+//-----------Close Medical request routes------------------//
+router.get("/dashboard/activity/medicalClose/:id", function(req, res) {
     var datetime = new Date();
     Request.findByIdAndUpdate(req.params.id, { $set: { 'currentStatus': 'Inactive' } }, function(err, updatedRequest) {
         if (err) {
@@ -65,7 +100,37 @@ router.get("/dashboard/activity/close/:id", function(req, res) {
                 if (error) {
                     console.log(error);
                 } else {
-                    req.flash("success", "SOS Request Closed Successfully!")
+                    req.flash("success", "SOS Medical Request Closed Successfully!")
+                    res.redirect("/dashboard/activityLog");
+                }
+            });
+        }
+    });
+});
+//-----------Close Medical request routes------------------//
+router.get("/dashboard/activity/crimeClose/:id", function(req, res) {
+    var datetime = new Date();
+    Request.findByIdAndUpdate(req.params.id, { $set: { 'currentStatus': 'Inactive' } }, function(err, updatedRequest) {
+        if (err) {
+            req.flash("error", "Something went wrong!");
+            console.log(err);
+        } else {
+            closeTime = (datetime - updatedRequest.generatedAt) / (1000 * 60);
+            let trustScoreChange;
+            if (closeTime < 10) {
+                trustScoreChange = -10;
+            } else if (closeTime < 60 && closeTime > 10) {
+                trustScoreChange = -5;
+            } else if (closeTime < 90 && closeTime > 60) {
+                trustScoreChange = -2;
+            } else {
+                trustScoreChange = 0;
+            }
+            User.findByIdAndUpdate({ _id: req.user._id }, { $inc: { crimeRequestCount: -1, trustScore: trustScoreChange } }, function(error, updatedUser) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    req.flash("success", "SOS Crime Request Closed Successfully!")
                     res.redirect("/dashboard/activityLog");
                 }
             });
