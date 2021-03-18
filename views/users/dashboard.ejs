@@ -85,6 +85,8 @@
                                 </div>
                                 <form action="/request/send/medical/<%= currentUser._id %>" method="POST">
                                     <div class="modal-body">
+                                        <input type=hidden id = "medicalLatitude" name="latitude">
+                                        <input type=hidden id = "medicalLongitude" name="longitude">
                                         <h6>Your current location is :</h6> <p><p id = "medicalStatus"></p><a id = "medicalMapLink" target="_blank"></a></p>
                                         <h6>This message will be sent to the people inside 1km radius from your current location:</h6>
                                         <textarea name="message" id="msg" cols="55" rows="5" style="border-radius: 10px;padding: 3px;">My name is <%=currentUser.name.firstName + " " + currentUser.name.lastName %>.&#10;I am in need of immediate medical help at the address "current Address". 
@@ -117,9 +119,11 @@
                                     </div>
                                     <form action="/request/send/crime/<%= currentUser._id %>" method="POST">
                                         <div class="modal-body">
+                                            <input type=hidden id = "crimeLatitude" name="latitude">
+                                        <input type=hidden id = "crimeLongitude" name="longitude">
                                             <h6>Your current location is :</h6> <p><p id = "crimeStatus"></p><a id = "crimeMapLink" target="_blank"></a></p>
                                             <h6>This message will be sent to the people inside 1km radius from your current location:</h6>
-                                            <textarea name="message" id="msg" cols="55" rows="5" style="border-radius: 10px;padding: 3px;">My name is <%=currentUser.name.firstName + " " + currentUser.name.lastName %>.&#10;I am in need of immediate medical help at the address "current Address". 
+                                            <textarea name="message" id="msg" cols="55" rows="5" style="border-radius: 10px;padding: 3px;">My name is <%=currentUser.name.firstName + " " + currentUser.name.lastName %>.&#10;I am in need of immediate crime help at the address "current Address". 
                                             </textarea>
                                             <div class="form-row">
                                                 <div class="form-group col-md-6">
