@@ -70,7 +70,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <a href="/dashboard/activity/close/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
+                                                        <a href="/dashboard/activity/medicalClose/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -88,12 +88,12 @@
                 <ul>
                     <% if(foundRequests.length - medicalCount > 0){ %>
                         <% foundRequests.forEach(function(request, i){ %>
-                            <% if(request.typeOfRequest == "Crime"){ %>
+                            <% if(request.typeOfRequest == "Crime" && request.currentStatus == "Active"){ %>
                                 <% crimeCount++ %>
                                 <li>
                                     <div class="jumbotron">
                                         <p> Genrated AT <%= request.generatedAt %>
-                                            <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" data-bs-target="#modal-close">Close This Request!</button>
+                                            <button type="button" class="btn btn-danger btn-sm mb-1" data-bs-toggle="modal" style="display: block;" data-bs-target="#modal-close">Close This Request!</button>
                                             <!-- Modal Content Crime -->
                                             <div class="modal fade" id="modal-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
                                                 <div class="modal-dialog modal-info modal-dialog-centered" role="document">
@@ -111,7 +111,7 @@
                                                             </div>
                                                         </div>
                                                         <div class="modal-footer">
-                                                            <a href="/dashboard/activity/close/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
+                                                            <a href="/dashboard/activity/crimeClose/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
                                                     </div>
                                                 </div>
                                             </div>
