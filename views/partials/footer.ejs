@@ -84,6 +84,10 @@ crossorigin="anonymous">
 
 <script src="../stylesheets/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="../stylesheets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+<script
+      src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLE_MAPS_API_KEY%>"
+      async
+    ></script>
 <script type="text/javascript">
 function geoFindMe() {
 
@@ -106,21 +110,50 @@ function geoFindMe() {
     const longitude = position.coords.longitude;
 
     status.textContent = '';
-    //link to be shown on helpers device
-    mapLink.href = `https://www.google.com/maps/search/${latitude},+${longitude}/`;
-    mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
+    const geocoder = new google.maps.Geocoder();
+    geocodeLatLng(geocoder);
+  function geocodeLatLng(geocoder) {
+    const latlng = {
+      lat: latitude,
+      lng: longitude,
+    };
+  geocoder.geocode({ location: latlng }, (results, status) => {
+    if (status === "OK") {
+      if (results[0]) {
+            mapLink.textContent = `${results[0].formatted_address}`;
+            //link to be shown on helpers device
+            mapLink.href = `https://www.google.com/maps/search/${results[0].formatted_address}/`;
+
+      } else {
+        window.alert("No results found");
+      }
+    } else {
+      window.alert("Geocoder failed due to: " + status);
+    }
+  });
   }
+}
 
   function error() {
     status.textContent = 'Unable to retrieve your location';
   }
+  var options = {
+  enableHighAccuracy: true,
+  timeout: 5000,
+  maximumAge: 0
+};
 
   if(!navigator.geolocation) {
     status.textContent = 'Geolocation is not supported by your browser';
   } else {
     status.textContent = 'Locating…';
-    navigator.geolocation.getCurrentPosition(success, error);
+    navigator.geolocation.getCurrentPosition(success, error,options);
   }
+ 
+
+
+  
+
 
 }
 
