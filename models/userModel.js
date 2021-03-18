@@ -12,9 +12,6 @@ const userSchema = new mongoose.Schema({
         state: String,
         zip: Number
     },
-    currentAddress: {
-        location: String
-    },
     username: String,
     password: String,
     contact: {
