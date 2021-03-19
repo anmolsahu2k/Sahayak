@@ -1,7 +1,13 @@
 <!DOCTYPE html>
 <html>
 <%-include('../partials/header')-%>
-
+<style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;
+        width: 600px;   
+       }
+    </style>
 <%-include('../partials/sideNav')-%>
 <main class="content">
 
@@ -134,6 +140,7 @@
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
                                     </div>
                                 </form>
+                                <div id="map"></div>
                             </div>
                         </div>
                     </div>
@@ -243,6 +250,12 @@
         </div>
     </div>
     <%-include('../partials/footer')-%>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLE_MAPS_API_KEY%>"
+      async
+    ></script>
+    <script src="../../assets/js/google_maps.js"></script>
+
     <script>
         var crimeAttributes = $("#allCriminalAttributes div input[type='checkbox']");
         crimeAttributes.on('change', function() {

@@ -84,89 +84,24 @@ crossorigin="anonymous">
 
 <script src="../stylesheets/vendor/@popperjs/core/dist/umd/popper.min.js"></script>
 <script src="../stylesheets/vendor/bootstrap/dist/js/bootstrap.min.js"></script>
-<script
-      src="https://maps.googleapis.com/maps/api/js?key=<%=process.env.GOOGLE_MAPS_API_KEY%>"
-      async
-    ></script>
-<script type="text/javascript">
-function geoFindMe() {
-  let latitude, longitude; 
-
-  let status, mapLink;
-  let dashLatitude, dashLongitude;
-  if(this.id == 'medicalSOS')
-  {
-    status = document.querySelector('#medicalStatus');
-    mapLink = document.querySelector('#medicalMapLink');
-    dashLatitude = document.querySelector('#medicalLatitude');
-    dashLongitude = document.querySelector('#medicalLongitude');
-  } else {
-     status = document.querySelector('#crimeStatus');
-     mapLink = document.querySelector('#crimeMapLink');
-     dashLatitude = document.querySelector('#crimeLatitude');
-     dashLongitude = document.querySelector('#crimeLongitude');
-  }
-  
-
-  mapLink.href = '';
-  mapLink.textContent = '';
-
-  function success(position) {
-    latitude  = position.coords.latitude;
-    longitude = position.coords.longitude;
-    dashLatitude.value=latitude;
-    dashLongitude.value=longitude;
-
-    status.textContent = '';
-    const geocoder = new google.maps.Geocoder();
-    geocodeLatLng(geocoder);
-  function geocodeLatLng(geocoder) {
-    const latlng = {
-      lat: latitude,
-      lng: longitude,
-    };
-  geocoder.geocode({ location: latlng }, (results, status) => {
-    if (status === "OK") {
-      if (results[0]) {
-            mapLink.textContent = `${results[0].formatted_address}`;
-            //link to be shown on helpers device
-            mapLink.href = `https://www.google.com/maps/search/${results[0].formatted_address}/`;
-
-      } else {
-        window.alert("No results found");
-      }
-    } else {
-      window.alert("Geocoder failed due to: " + status);
-    }
-  });
-  }
-}
-
-  function error() {
-    status.textContent = 'Unable to retrieve your location';
-  }
-  var options = {
-  enableHighAccuracy: true,
-  timeout: 5000,
-  maximumAge: 0
-};
-
-  if(!navigator.geolocation) {
-    status.textContent = 'Geolocation is not supported by your browser';
-  } else {
-    status.textContent = 'Locating…';
-    navigator.geolocation.getCurrentPosition(success, error,options);
-  }
- 
 
 
-  
-
-
-}
-
-document.querySelector('#medicalSOS').addEventListener('click',geoFindMe);
-document.querySelector('#crimeSOS').addEventListener('click',geoFindMe);
-</script>
+ <script>
+// // Initialize and add the map
+// var map;
+// function initMap() {
+//   // The map, centered on Central Park
+//   const center = {lat: 40.774102, lng: -73.971734};
+//   const options = {zoom: 15, scaleControl: true, center: center};
+//   map = new google.maps.Map(
+//       document.getElementById('map'), options);
+//   // Locations of landmarks
+//   const dakota = {lat: 40.7767644, lng: -73.9761399};
+//   const frick = {lat: 40.771209, lng: -73.9673991};
+//   // The markers for The Dakota and The Frick Collection
+//   var mk1 = new google.maps.Marker({position: dakota, map: map});
+//   var mk2 = new google.maps.Marker({position: frick, map: map});
+// }
+  </script>
 
 </body>
