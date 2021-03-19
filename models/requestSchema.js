@@ -15,7 +15,9 @@ const requestSchema = new mongoose.Schema({
     },
     message: String,
     generatedAt: { type: Date, default: Date.now },
-    currentStatus: { type: String, default: "Active" }
+    currentStatus: { type: String, default: "Active" },
+    requestedUsers: [String],
+    acceptedUsers: [String]
 
 })
 
