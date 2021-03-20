@@ -5,8 +5,10 @@ const path = require('path');
 
 let multer = require('multer');
 const middleware = require("../middlewares/authMiddlewares");
+
 const User = require("../models/userModel");
 const Request = require("../models/requestSchema");
+const UserActivity = require("../models/userActivityLogSchema");
 
 
 router.get("/", function(req, res) {
@@ -27,7 +29,13 @@ router.get("/dashboard/activityLog", middleware.isLoggedIn, function(req, res){
             req.flash("error", "Something Bad Happened!")
             console.log(err);
         }else{
-            res.render("users/activityLog", {foundRequests: foundRequests});
+            UserActivity.find().where('handler.id').equals(req.user._id).exec(function(error, activityLog){
+                if(error){
+                    console.log(error);
+                } else{
+                    res.render("users/activityLog", {foundRequests: foundRequests, activityLog: activityLog});
+                }
+            });
         }
     });
 });

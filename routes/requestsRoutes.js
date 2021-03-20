@@ -4,7 +4,8 @@ const router = express.Router();
 const middleware = require("../middlewares/authMiddlewares");
 
 const Request = require("../models/requestSchema");
-const User = require("../models/userModel")
+const User = require("../models/userModel");
+const UserActivity = require("../models/userActivityLogSchema");
 
 //----------Send Medical SOS reqeust----------//
 router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, res) {
@@ -22,10 +23,8 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
         },
         message: req.body.message,
         requestedUsers: [],
-    }
+    };
     if (req.user.medicalRequestCount < 3) {
-
-
         var requestedUsers = [];
         User.find(function(err, users) {
             if (err)
@@ -64,8 +63,25 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
                             if (error) {
                                 console.log(error);
                             } else {
-                                req.flash("success", "Medical SOS Request Sent!");
-                                res.redirect("/dashboard");
+                                let newActivity = {
+                                    requestType: "MedicalHelp",
+                                    title: "Medical Help Needed!!",
+                                    generatedAt: Date.now(),
+                                    description: req.body.message,
+                                    handler: {
+                                        id : req.user._id,
+                                        username: req.user.username
+                                    },
+                                    relatedRequest: newRequest._id
+                                };
+                                UserActivity.create(newActivity, function(error, newActivity){
+                                    if(error){
+                                        console.log(err);
+                                    }else{
+                                        req.flash("success", "Medical SOS Request Sent!");
+                                        res.redirect("/dashboard");
+                                    }
+                                });
                             }
                         });
                     }
@@ -80,8 +96,8 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
         req.flash("error", "Maximum limit of sending Medical SOS is reached !");
         res.redirect("/dashboard");
     }
-    // console.log(req.body);
 });
+
 //----------Send Crime SOS reqeust----------//
 router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res) {
     let newRequest = {
@@ -95,7 +111,7 @@ router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res)
             long: req.body.longitude
         },
         message: req.body.message,
-    }
+    };
     if (req.user.crimeRequestCount < 3) {
         Request.create(newRequest, function(err, newRequest) {
             if (err) {
@@ -105,8 +121,25 @@ router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res)
                     if (error) {
                         console.log(error);
                     } else {
-                        req.flash("success", "Crime SOS Request Sent!");
-                        res.redirect("/dashboard");
+                        let newActivity = {
+                            requestType: "CrimeHelp",
+                            title: "Criminal Activity, Help Needed!!",
+                            generatedAt: Date.now(),
+                            description: req.body.message,
+                            handler: {
+                                id : req.user._id,
+                                username: req.user.username
+                            },
+                            relatedRequest: newRequest._id
+                        };
+                        UserActivity.create(newActivity, function(error, newActivity){
+                            if(error){
+                                console.log(err);
+                            }else{
+                                req.flash("success", "Crime SOS Request Sent!");
+                                res.redirect("/dashboard");
+                            }
+                        });
                     }
                 });
             }
@@ -141,14 +174,21 @@ router.get("/dashboard/activity/medicalClose/:id", function(req, res) {
                 if (error) {
                     console.log(error);
                 } else {
-                    req.flash("success", "SOS Medical Request Closed Successfully!")
-                    res.redirect("/dashboard/activityLog");
+                    UserActivity.updateOne({'relatedRequest': req.params.id}, {$set: {'closedAt': Date.now()}}, function(err, updatedLog){
+                        if(err){
+                            console.log(err);
+                        } else{
+                            req.flash("success", "SOS Medical Request Closed Successfully!")
+                            res.redirect("/dashboard/activityLog");
+                        }
+                    });
                 }
             });
         }
     });
 });
-//-----------Close Medical request routes------------------//
+
+//-----------Close Crime request routes------------------//
 router.get("/dashboard/activity/crimeClose/:id", function(req, res) {
     var datetime = new Date();
     Request.findByIdAndUpdate(req.params.id, { $set: { 'currentStatus': 'Inactive' } }, function(err, updatedRequest) {
@@ -171,8 +211,14 @@ router.get("/dashboard/activity/crimeClose/:id", function(req, res) {
                 if (error) {
                     console.log(error);
                 } else {
-                    req.flash("success", "SOS Crime Request Closed Successfully!")
-                    res.redirect("/dashboard/activityLog");
+                    UserActivity.updateOne({'relatedRequest': req.params.id}, {$set: {'closedAt': Date.now()}}, function(err, updatedLog){
+                        if(err){
+                            console.log(err);
+                        } else{
+                            req.flash("success", "SOS Crime Request Closed Successfully!")
+                            res.redirect("/dashboard/activityLog");
+                        }
+                    });
                 }
             });
         }
