@@ -2,7 +2,6 @@
 <html>
 <%-include('../partials/header')-%>
 <style>
-       /* Set the size of the div element that contains the map */
       .map_class {
         height: 80%;
         width: 80%;   
@@ -15,22 +14,6 @@
 
     <%-include('../partials/topNav')-%>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-2">
-        <!-- <div class="btn-toolbar dropdown">
-            <button class="btn btn-dark btn-sm me-2 dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="fas fa-plus me-2"></span>New Task
-            </button>
-            <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-0">
-                <a class="dropdown-item fw-normal rounded-top" href="#"><span class="fas fa-tasks"></span>New Task</a>
-                <a class="dropdown-item fw-normal" href="#"><span class="fas fa-cloud-upload-alt"></span>Upload Files</a>
-                <a class="dropdown-item fw-normal" href="#"><span class="fas fa-user-shield"></span>Preview Security</a>
-                <div role="separator" class="dropdown-divider my-0"></div>
-                <a class="dropdown-item fw-normal rounded-bottom" href="#"><span class="fas fa-rocket text-danger"></span>Upgrade to Pro</a>
-            </div>
-        </div>
-        <div class="btn-group">
-            <button type="button" class="btn btn-sm btn-outline-primary">Share</button>
-            <button type="button" class="btn btn-sm btn-outline-primary">Export</button>
-        </div> -->
     </div>
     <div class="row">
         <div class="col-8 mb-4">
@@ -43,7 +26,6 @@
                         <div id= "trustScore" class="col-md-6" style="display: inline-flex; background-color: greenyellow; border-radius: 50%;width: 70px;
                             height: 70px; text-align: center; margin: auto 1rem; line-height: 70px; font-size: 2rem;">
                             <%= currentUser.trustScore %>
-                            <!-- <label style="font-size: 1rem; width: 300px; text-align: center;"for="trustScore">Trust Score</label> -->
                         </div>
                     </div>
                     <div class="row">
@@ -71,12 +53,7 @@
                                 <p>Active Crime SOS count: <strong> <%= currentUser.crimeRequestCount  %></strong></p>
                             </div>
                         </div>
-                        <!-- <a class="btn btn-sm btn-dark me-2" href="#"><span class="fas fa-user-plus me-1"></span> Connect</a>
-                        <a class="btn btn-sm btn-secondary" href="#">Send Message</a> -->
                     </div>
-                    
-                    <!-- <a class="btn btn-sm btn-dark me-2" href="#"><span class="fas fa-user-plus me-1"></span> Connect</a>
-                    <a class="btn btn-sm btn-secondary" href="#">Send Message</a> -->
                 </div>
             </div>
         </div>
