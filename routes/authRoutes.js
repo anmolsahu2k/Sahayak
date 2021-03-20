@@ -2,24 +2,16 @@ const express = require("express"),
     router = express.Router(),
     passport = require("passport"),
     fs = require('fs'),
-    // bcrypt = require('bcrypt-nodejs'),
-    // async = require('async'),
-    // crypto = require('crypto'),
     nodemailer = require('nodemailer'),
     middleware = require("../middlewares/authMiddlewares"),
     request = require('request'); //to make http calls for API  
 
 
-// randomToken = require('random-token');
-
-
-// let multer = require('multer');
 
 const User = require("../models/userModel");
 
 // -------------Login GET request--------------//
 router.get("/login", function(req, res) {
-    // console.log(req.flash(error));
     res.render("auth/login");
 });
 
@@ -66,7 +58,6 @@ router.post("/signup", function(req, res) {
             // console.log(parsedData.results[0].geometry.location.lat);
             latitude = parsedData.results[0].geometry.location.lat;
             longitude = parsedData.results[0].geometry.location.lng;
-            // console.log(req.body.street + ' ' + req.body.city);
             const newUser = {
                 name: {
                     firstName: req.body.firstName,
@@ -122,26 +113,6 @@ router.get("/forgot", function(req, res) {
 router.get("/reset", function(req, res) {
     res.render("auth/reset");
 });
-
-router.post("/forgot", function(req, res) {
-    // user.resetPasswordToken = token;
-    // user.resetPasswordExpires = Date.now() + 3600000;
-
-    // const resetEmail = {
-    //     to: user.email,
-    //     from: 'passwordreset@example.com',
-    //     subject: 'Node.js Password Reset',
-    //     text: `
-    //   You are receiving this because you (or someone else) have requested the reset of the password for your account.
-    //   Please click on the following link, or paste this into your browser to complete the process:
-    //   http://${req.headers.host}/reset/${token}
-    //   If you did not request this, please ignore this email and your password will remain unchanged.
-    // `,
-    // };
-    //------------------------------------------
-
-
-})
 
 // Reset password
 router.get("/reset", middleware.isLoggedIn, function(req, res) {
@@ -211,14 +182,7 @@ router.post("/reset", function(req, res) {
                     return console.log(error);
                 }
                 console.log('Message sent: %s', info.messageId);
-                // Preview only available when sending through an Ethereal account
                 console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
-                // bcrypt.hash(pass, saltRounds, function (err, hash) {
-                //     User.changePassword(userid, hash);
-                // });
-
-                // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
-                // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
             });
             transporter.verify(function(error, success) {
                 if (error) {
