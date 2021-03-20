@@ -8,6 +8,8 @@ const requestSchema = new mongoose.Schema({
             ref: "User",
         },
         username: String,
+        firstName: String,
+        lastName: String
     },
     sourceLocation: {
         lat: String,
