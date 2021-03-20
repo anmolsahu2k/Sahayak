@@ -20,10 +20,10 @@
             <div class="card shadow-sm p-0">
                 <div class="profile-cover rounded-top" data-background="../assets/img/profile-cover.jpg"></div>
                 <div class="card-body pb-5">
-                    <img src="../assets/img/team/user.png" class="user-avatar large-avatar mx-auto mt-n7 mb-4">
+                    <img src="../assets/img/team/user1.png" class="user-avatar large-avatar mx-auto mt-n7 mb-4">
                     <div style="justify-content: center; text-align: center; margin-bottom: 1rem;">
                         <h4 class="h3 text-center" style="display: inline-flex;"><%= currentUser.name.firstName + " " + currentUser.name.lastName %></h4>
-                        <div id= "trustScore" class="col-md-6" style="display: inline-flex; background-color: greenyellow; border-radius: 50%;width: 70px;
+                        <div id= "trustScore" data-toggle="popover" data-placement="Right" title="Trust Score" data-content="And here's some amazing content. It's very engaging. Right?" class="col-md-6" style="display: inline-flex; background-color: greenyellow; border-radius: 50%;width: 70px;
                             height: 70px; text-align: center; margin: auto 1rem; line-height: 70px; font-size: 2rem;">
                             <%= currentUser.trustScore %>
                         </div>
@@ -113,7 +113,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <p style="color: rgb(199, 33, 33);">#Your Trust Score will have adverse effects if fake SOS is genreated.</p>
+                                        <p style="color: rgb(199, 33, 33);">#Your Trust Score will decreement if fake SOS is genreated.</p>
                                         <p style="color: green;">*Your Phone number will be shown only when receiver accepts your SOS call</p>
                                     </div>
                                     <div class="modal-footer">
@@ -203,7 +203,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <p style="color: rgb(199, 33, 33);">#Your Trust Score will have adverse effects if fake SOS is genreated.</p>
+                                            <p style="color: rgb(199, 33, 33);">#Your Trust Score will decreement if fake SOS is genreated.</p>
                                             <p style="color: green;">*Your Phone number will be shown only when receiver accepts your SOS call</p>
                                         </div>
                                         <div class="modal-footer">
@@ -265,6 +265,13 @@
             $('#medicalMsg').val(
                 $.trim($('#medicalMsg').val()) + this.value
             );
+        });
+
+        $(document).ready(function(){
+            $('#trustScore').popover({
+                placement : 'top',
+                trigger : 'hover'
+            });
         });
     </script>
 </main>
