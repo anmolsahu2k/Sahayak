@@ -40,6 +40,23 @@ router.get("/dashboard/activityLog", middleware.isLoggedIn, function(req, res){
     });
 });
 
+// -----------------Accept SOS request route-------------//
+router.get("/dashboard/acceptSOS", middleware.isLoggedIn, function(req, res){
+    let foundAcceptRequests = [];
+    Request.find({}).exec(function(error, allRequests){
+        if(error){
+            console.log(error);
+        }else{
+            allRequests.forEach(function(request, i){
+                if(request.requestedUsers.includes(req.user._id)){
+                    foundAcceptRequests.push(request);
+                }
+            });
+            res.render("users/acceptSOS", {foundAcceptRequests: foundAcceptRequests });
+        }
+    });
+});
+
 const upload = multer({dest: __dirname + '/uploads/images'});
 
 // ------------User Profile Update Post route--------------//

@@ -16,6 +16,8 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
         handler: {
             id: req.params.id,
             username: req.user.username,
+            firstName: req.user.name.firstName,
+            lastName: req.user.name.lastName
         },
         sourceLocation: {
             lat: latitude,
@@ -49,7 +51,7 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
                             return deg * (Math.PI / 180)
                         }
                         var distance_from_location = getDistanceFromLatLonInKm(latitude, longitude, location.geoCoded.lat, location.geoCoded.long) //distance in meters between your location and the marker
-                        if (distance_from_location <= 10) {
+                        if (distance_from_location <= 100) {
                             requestedUsers.push(location._id);
                         }
                     })(users[j]);
@@ -70,7 +72,7 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
                                     description: req.body.message,
                                     handler: {
                                         id: req.user._id,
-                                        username: req.user.username
+                                        username: req.user.username,    
                                     },
                                     relatedRequest: newRequest._id
                                 };
@@ -105,6 +107,8 @@ router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res)
         handler: {
             id: req.params.id,
             username: req.user.username,
+            firstName: req.user.name.firstName,
+            lastName: req.user.name.lastName
         },
         sourceLocation: {
             lat: req.body.latitude,

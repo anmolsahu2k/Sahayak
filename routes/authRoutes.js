@@ -33,11 +33,11 @@ router.post(
     }),
     function(req, res) {
         if (req.user.role == "notAdmin") {
-            req.flash("success", "Welcome to SOSassist! " + req.user.username);
+            req.flash("success", "Welcome to Sahayak! " + req.user.username);
             res.redirect("/dashboard");
 
         } else if (req.user.role == "admin") {
-            req.flash("success", "Welcome to SOSassist! " + req.user.username);
+            req.flash("success", "Welcome to Sahayak! " + req.user.username);
             res.redirect("/");
 
         } else res.send(404);
