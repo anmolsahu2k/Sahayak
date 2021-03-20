@@ -9,7 +9,8 @@ const requestSchema = new mongoose.Schema({
         },
         username: String,
         firstName: String,
-        lastName: String
+        lastName: String,
+        contact: Number
     },
     sourceLocation: {
         lat: String,
