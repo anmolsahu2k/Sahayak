@@ -17,7 +17,8 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
             id: req.params.id,
             username: req.user.username,
             firstName: req.user.name.firstName,
-            lastName: req.user.name.lastName
+            lastName: req.user.name.lastName,
+            contact: req.user.contact.phone
         },
         sourceLocation: {
             lat: latitude,
@@ -105,7 +106,8 @@ router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res)
             id: req.params.id,
             username: req.user.username,
             firstName: req.user.name.firstName,
-            lastName: req.user.name.lastName
+            lastName: req.user.name.lastName,
+            contact: req.user.contact.phone
         },
         sourceLocation: {
             lat: req.body.latitude,
