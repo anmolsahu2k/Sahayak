@@ -11,7 +11,6 @@ const UserActivity = require("../models/userActivityLogSchema");
 router.get("/dashboard/accept/confirm/:id", middleware.isLoggedIn, function(req, res){
     let userId = req.user._id;
     let requestId = req.params.id;
-    console.log(requestId, userId);
     Request.findByIdAndUpdate(req.params.id, {"$push": {acceptedUsers: userId}}, function(err, updatedRequest){
         if(err){
             console.log(err);
@@ -26,6 +25,27 @@ router.get("/dashboard/accept/confirm/:id", middleware.isLoggedIn, function(req,
                 }
             });
         }
+    });
+});
+
+router.post("/dashboard/accept/close/:id", middleware.isLoggedIn, function(req, res){
+    let requestId = req.params.id;
+    let trustScoreChange = 0;
+    if(req.body.authenticity == "Yes" && req.body.similarity == "Yes")
+    {
+        trustScoreChange = 10;
+    } else if(req.body.authenticity == "Yes" && req.body.similarity == "No"){
+        trustScoreChange = 5;
+    } else if(req.body.authenticity == "No" && req.body.similarity == "NO"){
+        trustScoreChange = -10;
+    }
+    User.findByIdAndUpdate(req.user._id, {$pull: {acceptedRequests: requestId}, $push: {closedRequests: requestId}, $inc: {trustScore: trustScoreChange}}, { safe: true, upsert: true }, 
+        function(err, updatedUser){
+            if(err){
+                console.log(err);
+            } else{
+                res.redirect("/dashboard/acceptSOS");
+            }
     });
 });
 

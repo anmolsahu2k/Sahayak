@@ -34,7 +34,8 @@ const userSchema = new mongoose.Schema({
     medicalRequestCount: { type: Number, default: 0 },
     crimeRequestCount: { type: Number, default: 0 },
     trustScore: { type: Number, default: 50 },
-    acceptedRequests: {type: [String], default: null}
+    acceptedRequests: {type: [String], default: null},
+    closedRequests: {type: [String], default: null}
 });
 
 userSchema.plugin(passportLocalMongoose);
