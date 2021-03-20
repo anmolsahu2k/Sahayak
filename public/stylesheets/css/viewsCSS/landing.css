@@ -1,78 +1,86 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merienda+One&family=Philosopher&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400&display=swap');
-body{
-    background: rgb(14,19,43);
-    background: linear-gradient(90deg, rgba(14,19,43,1) 11%, rgba(23,31,65,1) 37%, rgba(22,34,83,1) 59%, rgba(27,42,107,1) 83%);
+
+body {
+    background: rgb(14, 19, 43);
+    background: linear-gradient(90deg, rgba(14, 19, 43, 1) 11%, rgba(23, 31, 65, 1) 37%, rgba(22, 34, 83, 1) 59%, rgba(27, 42, 107, 1) 83%);
     overflow: hidden;
 }
-#text{
+
+#text {
     color: white;
     width: 60%;
     text-align: center;
     margin: 12rem;
 }
 
-#text > h1{
+#text>h1 {
     color: rgb(236, 16, 16);
     font-family: 'Nunito Sans', sans-serif;
     font-size: 3rem;
     font-weight: 1000;
 }
 
-#text > p{
+#text>p {
     font-family: 'Merienda One', cursive;
     font-family: 'Philosopher', sans-serif;
     font-size: 18px;
 }
 
-#signup {background-image: linear-gradient(to right, #1A2980 0%, #26D0CE  51%, #1A2980  100%)}
 #signup {
-margin: 10px;
-padding: 15px 45px;
-text-align: center;
-text-transform: uppercase;
-transition: 0.5s;
-background-size: 200% auto;
-color: white;            
-/* box-shadow: 0 0 20px #eee; */
-border-radius: 25px;
-display: inline-flex;
+    background-image: linear-gradient(to right, #1A2980 0%, #26D0CE 51%, #1A2980 100%)
+}
+
+#signup {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+
+    border-radius: 25px;
+    display: inline-flex;
 }
 
 #signup:hover {
-background-position: right center; /* change the direction of the change here */
-color: #fff;
-text-decoration: none;
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
 }
 
-#signin {background-image: linear-gradient(to right, #F7971E 0%, #FFD200  51%, #F7971E  100%)}
-     #signin {
-        margin: 10px;
-        padding: 15px 45px;
-        text-align: center;
-        text-transform: uppercase;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: black;            
-        /* box-shadow: 0 0 20px #eee; */
-        border-radius: 25px;
-        display: inline-flex;
-      }
-
-      #signin:hover {
-        background-position: right center; /* change the direction of the change here */
-        color: #000;
-        text-decoration: none;
-      }
-
-
-      * {
-margin: 0;
-padding: 0; 
+#signin {
+    background-image: linear-gradient(to right, #F7971E 0%, #FFD200 51%, #F7971E 100%)
 }
 
-.icons{
+#signin {
+    margin: 10px;
+    padding: 15px 45px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: black;
+    box-shadow: 0 0 20px #eee;
+    border-radius: 25px;
+    display: inline-flex;
+}
+
+#signin:hover {
+    background-position: right center;
+    change the direction of the change here color: #000;
+    text-decoration: none;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.icons {
     display: none;
     margin-top: 4rem;
     margin-left: 4rem;
@@ -82,14 +90,15 @@ padding: 0;
     width: 100%;
 }
 
-.fa-user-friends{
-    color: #948f8d;
-}
-.fa-address-book{
+.fa-user-friends {
     color: #948f8d;
 }
 
-#nav-icon2{
+.fa-address-book {
+    color: #948f8d;
+}
+
+#nav-icon2 {
     display: inline-flex;
     width: 60px;
     height: 45px;
@@ -111,84 +120,89 @@ padding: 0;
 }
 
 #nav-icon2 span {
-display: block;
-position: absolute;
-height: 2px;
-width: 50%;
-background: #948f8d;
-opacity: 1;
--webkit-transform: rotate(0deg);
--moz-transform: rotate(0deg);
--o-transform: rotate(0deg);
-transform: rotate(0deg);
--webkit-transition: .25s ease-in-out;
--moz-transition: .25s ease-in-out;
--o-transition: .25s ease-in-out;
-transition: .25s ease-in-out;
+    display: block;
+    position: absolute;
+    height: 2px;
+    width: 50%;
+    background: #948f8d;
+    opacity: 1;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
 }
 
 #nav-icon2 span:nth-child(even) {
-left: 50%;
-border-radius: 0 9px 9px 0;
+    left: 50%;
+    border-radius: 0 9px 9px 0;
 }
 
 #nav-icon2 span:nth-child(odd) {
-left:0px;
-border-radius: 9px 0 0 9px;
+    left: 0px;
+    border-radius: 9px 0 0 9px;
 }
 
-#nav-icon2 span:nth-child(1), #nav-icon2 span:nth-child(2) {
-top: 0px;
+#nav-icon2 span:nth-child(1),
+#nav-icon2 span:nth-child(2) {
+    top: 0px;
 }
 
-#nav-icon2 span:nth-child(3), #nav-icon2 span:nth-child(4) {
-top: 18px;
+#nav-icon2 span:nth-child(3),
+#nav-icon2 span:nth-child(4) {
+    top: 18px;
 }
 
-#nav-icon2 span:nth-child(5), #nav-icon2 span:nth-child(6) {
-top: 36px;
+#nav-icon2 span:nth-child(5),
+#nav-icon2 span:nth-child(6) {
+    top: 36px;
 }
 
-#nav-icon2.open span:nth-child(1),#nav-icon2.open span:nth-child(6) {
--webkit-transform: rotate(45deg);
--moz-transform: rotate(45deg);
--o-transform: rotate(45deg);
-transform: rotate(45deg);
+#nav-icon2.open span:nth-child(1),
+#nav-icon2.open span:nth-child(6) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
 }
 
-#nav-icon2.open span:nth-child(2),#nav-icon2.open span:nth-child(5) {
--webkit-transform: rotate(-45deg);
--moz-transform: rotate(-45deg);
--o-transform: rotate(-45deg);
-transform: rotate(-45deg);
+#nav-icon2.open span:nth-child(2),
+#nav-icon2.open span:nth-child(5) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
 }
 
 #nav-icon2.open span:nth-child(1) {
-left: 5px;
-top: 7px;
+    left: 5px;
+    top: 7px;
 }
 
 #nav-icon2.open span:nth-child(2) {
-left: calc(50% - 5px);
-top: 7px;
+    left: calc(50% - 5px);
+    top: 7px;
 }
 
 #nav-icon2.open span:nth-child(3) {
-left: -50%;
-opacity: 0;
+    left: -50%;
+    opacity: 0;
 }
 
 #nav-icon2.open span:nth-child(4) {
-left: 100%;
-opacity: 0;
+    left: 100%;
+    opacity: 0;
 }
 
 #nav-icon2.open span:nth-child(5) {
-left: 5px;
-top: 29px;
+    left: 5px;
+    top: 29px;
 }
 
 #nav-icon2.open span:nth-child(6) {
-left: calc(50% - 5px);
-top: 29px;
+    left: calc(50% - 5px);
+    top: 29px;
 }

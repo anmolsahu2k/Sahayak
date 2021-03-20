@@ -28796,7 +28796,8 @@ label {
 .bootstrap-big-icon {
     position: absolute;
     opacity: .05;
-    transform: rotate(17deg);
+    /*transform: rotate(17deg);*/
+
 }
 
 @media (min-width: 992px) {
@@ -28808,8 +28809,8 @@ label {
 
 @media (min-width: 1200px) {
     .bootstrap-big-icon {
-        right: -10%;
-        bottom: 6%;
+        right: 14%;
+        bottom: 30%;
     }
 }
 
