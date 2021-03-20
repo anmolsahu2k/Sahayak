@@ -14,11 +14,14 @@ function geoFindMe() {
         mapLink = document.querySelector('#medicalMapLink');
         dashLatitude = document.querySelector('#medicalLatitude');
         dashLongitude = document.querySelector('#medicalLongitude');
+        mapId = document.querySelector("#medicalMap");
     } else {
         status = document.querySelector('#crimeStatus');
         mapLink = document.querySelector('#crimeMapLink');
         dashLatitude = document.querySelector('#crimeLatitude');
         dashLongitude = document.querySelector('#crimeLongitude');
+        mapId = document.querySelector("#crimeMap");
+
     }
 
 
@@ -71,7 +74,7 @@ function geoFindMe() {
         status.textContent = 'Geolocation is not supported by your browser';
     } else {
 
-        map = new google.maps.Map(document.getElementById("map"), {
+        map = new google.maps.Map(mapId, {
             center: { lat: -34.397, lng: 150.644 },
             zoom: 14,
         });

@@ -3,10 +3,12 @@
 <%-include('../partials/header')-%>
 <style>
        /* Set the size of the div element that contains the map */
-      #map {
-        height: 400px;
-        width: 600px;   
+      .map_class {
+        height: 80%;
+        width: 80%;   
+        margin-top: 2rem;
        }
+
     </style>
 <%-include('../partials/sideNav')-%>
 <main class="content">
@@ -84,13 +86,15 @@
                     <% if(currentUser.trustScore > 10) { %>
                     <div class="text-center mt-5 "><button style="border-radius: 25px;" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" id="medicalSOS" data-bs-target="#modal-medical">Medical SOS</button></div>
                     <div class="modal fade" id="modal-medical" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-dialog modal-dialog-centered  modal-xl" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h2 class="h6 modal-title">Do you want to proceed ?</h2>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form action="/request/send/medical/<%= currentUser._id %>" method="POST">
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                       <form action="/request/send/medical/<%= currentUser._id %>" method="POST">
                                     <div class="modal-body">
                                         <input type=hidden id = "medicalLatitude" name="latitude">
                                         <input type=hidden id = "medicalLongitude" name="longitude">
@@ -103,7 +107,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="My Vehicle is crashed." id="vehicleAccident">
                                                     <label class="form-check-label" for="defaultCheck10">
-                                                        Vehicle Accident.
+                                                        Vehicle Accident
                                                     </label>
                                                 </div>
                                             </div>
@@ -111,7 +115,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Multiple people are injured." id="multipleInjuries">
                                                     <label class="form-check-label" for="defaultCheck10">
-                                                        Multiple injured.
+                                                        Multiple injured
                                                     </label>
                                                 </div>
                                             </div>
@@ -119,7 +123,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="People are seriously injured with head injuries." id="seriousInjuries">
                                                     <label class="form-check-label" for="defaultCheck10">
-                                                        Seriously Injured with head injuries.
+                                                        Seriously Injured with head injuries
                                                     </label>
                                                 </div>
                                             </div>
@@ -127,7 +131,7 @@
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" value="Preganent Woman is going through labour pain." id="preganancy">
                                                     <label class="form-check-label" for="defaultCheck10">
-                                                        Preganent Women.
+                                                        Preganent Woman
                                                     </label>
                                                 </div>
                                             </div>
@@ -139,8 +143,15 @@
                                         <button type="submit" class="btn btn-success">Send</button>
                                         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
                                     </div>
-                                </form>
-                                <div id="map"></div>
+                                </form> 
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div id="medicalMap" class="map_class"></div>
+                                    </div>
+                                    
+                                </div>
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -165,13 +176,15 @@
                     <% if(currentUser.trustScore > 20) { %>
                     <div class="text-center mt-5"><button style="border-radius: 25px;" type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#modal-crime" id="crimeSOS">Crime SOS</button></div>
                         <div class="modal fade" id="modal-crime" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h2 class="h6 modal-title">Do you want to proceed ?</h2>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <form action="/request/send/crime/<%= currentUser._id %>" method="POST">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <form action="/request/send/crime/<%= currentUser._id %>" method="POST">
                                         <div class="modal-body">
                                             <input type=hidden id = "crimeLatitude" name="latitude">
                                         <input type=hidden id = "crimeLongitude" name="longitude">
@@ -221,6 +234,14 @@
                                             <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Reject</button>
                                         </div>
                                     </form>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div id="crimeMap" class="map_class"></div>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    
                                 </div>
                             </div>
                         </div>
