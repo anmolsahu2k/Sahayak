@@ -3,7 +3,64 @@
 <%-include('partials/header')-%>
 <link rel="stylesheet" href="/stylesheets/css/viewsCSS/landing.css">
 <body>
-    <div class="row">
+
+    <header class="header-global">
+    <nav id="navbar-main" aria-label="Primary navigation" class="navbar navbar-main navbar-expand-lg navbar-theme-primary pt-4 navbar-dark">
+        <div class="container position-relative">
+            <div class="navbar-collapse collapse me-auto" id="navbar_global">
+                <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+                    <li class="nav-item me-2">
+                        <a href="./pages/dashboard/dashboard.html" class="nav-link">About Us</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a href="./pages/examples/sign-in.html" class="nav-link">Blog</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a href="./pages/examples/sign-up.html" class="nav-link">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="d-flex align-items-center ms-auto">
+                <!-- <img src="../assets/img/brand/sldka.png" class="d-block mx-auto mb-3" height="50" width="50" alt="Sahayak Logo"> -->
+            </div>
+        </div>
+    </nav>
+</header>
+    <main>
+
+        <!-- Hero -->
+        <section class="section-header overflow-hidden pt-7 pt-lg-8 pb-9 pb-lg-12 bg-primary text-white">
+            <div class="container">
+                <div class="bootstrap-big-icon d-none d-lg-block">                     
+                 <img src="../assets/img/brand/clipart2691497.png">
+                        </div>
+                <div class="row">
+                    <div class="col-12 text-center">
+
+                        <!-- <img src="https://fontmeme.com/permalink/210320/6d17f004e51c8cc0937d07417917a77d.png" alt="samarkan-font" border="0"> -->
+                        <img class="mb-2" src="https://fontmeme.com/permalink/210320/c38112f2aab8c423e67f009a7a09a42b.png" alt="samarkan-font" border="0">
+                        <!-- <img class="mb-2" src="https://fontmeme.com/permalink/210320/c3800703a378b67da8f2e7ad5bcceb64.png" alt="samarkan-font" border="0"> -->
+                        <h2 class="lead fw-normal text-muted mb-5">SOS Assistance Platform</h2>
+                        <!-- Button Modal -->
+                        <div class="d-flex align-items-center justify-content-center mb-5">
+                             <a href="/signup">
+                                 <button class="btn mb-2 me-2 btn-outline-success" type="button"><i class="fas fa-user-plus  me-2" ></i>Signup</button>
+                             </a>
+                             <a href="/login">
+                                 <button class="btn mb-2 me-2 btn-outline-secondary" type="button"><i class="fas fa-sign-in-alt me-2"></i>Login</button>
+                             </a>
+                            
+                        </div>
+                        <div class="d-flex justify-content-center flex-column mb-6 mb-lg-5">
+                                
+                                <span class="text-muted font-small">Made with 
+&#10084;</b> </span>
+                        </div>
+                    </div>
+                </div>
+            </div>       
+        </section>
+    <!-- <div class="row">
         <div class="navBar col-md-1">
             <div id="nav-icon2">
                 <span></span>
@@ -35,16 +92,16 @@
                 <a class="btn btn-sm" id="signin" href="/login">Login!</a>
             </div>
         </div>
-    </div>
+    </div> -->
 </body>
 
 <%-include('partials/footer')-%>
-<script>
+<!-- <script>
     $(document).ready(function(){
 	$('.navBar').hover(function(){
 		$("#nav-icon2").toggleClass('open');
         $(".icons").toggle(100);
 	});
 });
-</script>
+</script> -->
 </html>
