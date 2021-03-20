@@ -89,9 +89,6 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
                     }
                 });
             }
-            // console.log(users);
-            // var distance=computeDistanceBetween({latitude,longitude})
-            // var books = user.map((item) => {return item.title;});
         });
 
     } else {
@@ -152,7 +149,6 @@ router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res)
         req.flash("error", "Maximum limit of sending Crime SOS is reached !");
         res.redirect("/dashboard");
     }
-    // console.log(req.body);
 });
 
 //-----------Close Medical request routes------------------//

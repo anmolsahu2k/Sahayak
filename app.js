@@ -24,7 +24,6 @@ let authRoutes = require('./routes/authRoutes'),
     indexRoutes = require('./routes/indexRoutes'),
     requestRoutes = require('./routes/requestsRoutes'),
     acceptRoutes = require("./routes/acceptRoutes");
-// google_maps = require('./public/assets/js/google_maps');
 
 mongoose.connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
