@@ -46,6 +46,29 @@
                             <p> Genrated At: <strong><%= moment(request.generatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a") %> </strong></p>
                             <p> Requester Name: <Strong><%= request.handler.firstName + " " + request.handler.lastName %></Strong></p>
                             <span class="btn btn-warning btn-sm mt-2" id="showRequesterDetails">Show Requester Details</span>
+                            <span style="margin-left: 1rem; background-color: rgb(197, 41, 41);" data-bs-toggle="modal" data-bs-target="#modal-review-close" class="btn btn-danger btn-sm mt-2" id = "reviewClose">Review and Close Request</span>
+                            <!-- Modal Content Medical-->
+                            <div class="modal fade" id="modal-review-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
+                                <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-gradient-primary">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="modal-title-notification" style="margin-left: auto; color: white; text-align: center !important;">Confirmation</h3>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="py-3 text-center">
+                                                <span class="modal-icon display-1-lg" style="color: red"><i class="fas fa-exclamation"></i></span></span>
+                                                <p style="color: white;">Reqeust Generated at <%= request.generatedAt.toLocaleTimeString(); %> </p>
+                                                <p style="color: white;">Do you want to close this request?</p>
+                                                <p style="color: rgb(248, 95, 95)">*Closing this request too soon may affect your Trust Score.</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="/dashboard/activity/medicalClose/<%=request._id%>" style="margin: auto;" class="btn btn-danger btn-md">Close This Request</a>                                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Modal Content -->
                             <div style="margin-top: 1rem; display: none;" id="hello">
                                 <p>Location of Requester: <strong></strong></p>
                                 <p>Contact Number of Requester: <strong><%= request.handler.contact %></strong></p>
