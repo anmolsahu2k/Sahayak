@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%-include('../partials/header')-%>
+<%-include('../partials/sideNav')-%>
+
+<style>
+    #acceptedRequest{
+        padding: 16px;
+        background-color: #CDEDE4;
+        color: black;
+        margin: 0.5rem;
+        width: 80%;
+        border:1px solid rgb(110, 207, 154)
+    }
+
+    #pendingRequest{
+        padding: 5px;
+        background-color: #e9d1c9;
+        color: black;
+        margin: 0.5rem;
+        width: 80%;
+        border:1px solid rgb(161, 13, 13)
+    }
+
+    #acceptedRequest > p {
+        margin: 0;
+    }
+    #pendingRequest > p {
+        margin: 0;
+    }
+</style>
+
+<main class="content">
+    <%-include('../partials/topNav')-%>
+
+    <ul>
+        <h3>Answer SOS Requests: </h3>
+        <% if(foundAcceptRequests.length > 0){ %>
+            <% foundAcceptRequests.forEach(function(request, i){ %> 
+                <% if(!request.handler.id.equals(currentUser._id) && currentUser.acceptedRequests.includes(request._id)) { %> 
+                    <ul>
+                        <div class="jumbotron" id="acceptedRequest">
+                            <span class="badge badge-lg bg-success" style="float: right; margin-right: 1rem; margin-top: 0.5rem">Request Accepted</span>
+                            <p>SOS Request Type: <strong><%= request.typeOfRequest%></strong></p>
+                            <p> Genrated At: <strong><%= moment(request.generatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a") %> </strong></p>
+                            <p> Requester Name: <Strong><%= request.handler.firstName + " " + request.handler.lastName %></Strong></p>
+                            <span class="btn btn-warning btn-sm mt-2" id="showRequesterDetails">Show Requester Details</span>
+                            <div style="margin-top: 1rem; display: none;" id="hello">
+                                <p>Location of Requester: <strong></strong></p>
+                                <p>Contact Number of Requester: <strong><%= request.handler.contact %></strong></p>
+                            </div>
+                        </div>
+                    </ul>
+                <% } else if(!request.handler.id.equals(currentUser._id) && !currentUser.acceptedRequests.includes(request._id)) { %>
+                    <ul>
+                        <div class="jumbotron" id="pendingRequest">
+                            <p>SOS Request Type: <strong><%= request.typeOfRequest%></strong></p>
+                            <p> Genrated At: <strong><%= moment(request.generatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a") %> </strong></p>
+                            <p> Requester Name: <Strong><%= request.handler.firstName + " " + request.handler.lastName %></Strong></p>
+
+                            <button type="button" class="btn btn-success btn-sm mb-1 mt-2" data-bs-toggle="modal" data-bs-target="#modal-close">Answer This Request!</button>
+                            <!-- Modal Content Medical-->
+                            <div class="modal fade" id="modal-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
+                                <div class="modal-dialog modal-info modal-dialog-centered" role="document">
+                                    <div class="modal-content bg-gradient-primary">
+                                        <div class="modal-header">
+                                            <h3 class="modal-title" id="modal-title-notification" style="margin-left: auto; color: white; text-align: center !important;">Confirmation</h3>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="py-3 text-center">
+                                                <span class="modal-icon display-1-lg" style="color: rgb(57, 141, 9)"><i class="fas fa-check"></i></span></span>
+                                                <p style="color: white;">Reqeust Generated at <%=  moment(request.generatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a"); %> </p>
+                                                <p style="color: white;">Do you want to accept this request?</p>
+                                                <p style="color: rgb(81, 170, 9)">*Details like: <strong>Requester's location, Phone number</strong> will be revelaed to you once you accept this request.</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="/dashboard/accept/confirm/<%=request._id%>" style="margin: auto;" class="btn btn-success btn-md">Answer This Request</a>                                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End of Modal Content -->
+                        </div>
+                    </ul>
+                <% } else if(foundAcceptRequests.length <= 0) { %>
+                    <ul>
+                        <h5>No Active requests are available to accept!!</h5>
+                    </ul>
+                <% } %>
+            <% }); %>
+        <% } else { %> 
+            <h5>Something Went Wrong!!</h5>
+        <% } %>
+    </ul>
+</main>
+<div class="theme-settings card pt-2 collapse" id="theme-settings">
+</div>
+
+<%-include('../partials/footer')-%>
+
+<script>
+    $("#showRequesterDetails").click(function(){
+        $("#hello").toggle("slow");
+    });
+</script>
+</html>
