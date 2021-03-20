@@ -45,7 +45,7 @@
                             <p>SOS Request Type: <strong><%= request.typeOfRequest%></strong></p>
                             <p> Genrated At: <strong><%= moment(request.generatedAt).format("dddd, MMMM Do YYYY, h:mm:ss a") %> </strong></p>
                             <p> Requester Name: <Strong><%= request.handler.firstName + " " + request.handler.lastName %></Strong></p>
-                            <span class="btn btn-warning btn-sm mt-2" id="showRequesterDetails">Show Requester Details</span>
+                            <span class="btn btn-warning btn-sm mt-2 showRequesterDetails">Show Requester Details</span>
                             <span style="margin-left: 1rem; background-color: rgb(197, 41, 41);" data-bs-toggle="modal" data-bs-target="#modal-review-close" class="btn btn-danger btn-sm mt-2" id = "reviewClose">Review and Close Request</span>
                             <!-- Modal Content Medical-->
                             <div class="modal fade" id="modal-review-close" tabindex="-1" role="dialog" aria-labelledby="modal-close" aria-hidden="true">
@@ -69,7 +69,7 @@
                                 </div>
                             </div>
                             <!-- End of Modal Content -->
-                            <div style="margin-top: 1rem; display: none;" id="hello">
+                            <div style="margin-top: 1rem; display: none;" class="hello">
                                 <p>Location of Requester: <strong></strong></p>
                                 <p>Contact Number of Requester: <strong><%= request.handler.contact %></strong></p>
                             </div>
@@ -124,8 +124,8 @@
 <%-include('../partials/footer')-%>
 
 <script>
-    $("#showRequesterDetails").click(function(){
-        $("#hello").toggle("slow");
+    $('.showRequesterDetails').click(function() {
+        $(this).next().next().next().toggle("slow");
     });
 </script>
 </html>
