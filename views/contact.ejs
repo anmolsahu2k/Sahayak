@@ -13,6 +13,17 @@
         }
     </style>
 <body>
+    <div class="container" style="margin-top: 1rem;">
+        <% if(success && success.length > 0) { %> 
+          <div class="alert alert-success" role="alert">
+            <%=success%>
+          </div>
+        <% }else if(error && error.length > 0) { %>
+          <div class="alert alert-danger" role="alert">
+            <%= error %>
+          </div>
+        <% } %>
+    </div>
 
     <a href="/" class="btn btn-primary" style="margin-left: 11rem; border-radius: 50%; display: inline-flex;">
         <i class="fas fa-arrow-left"></i>
