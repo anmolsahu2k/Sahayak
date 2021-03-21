@@ -117,7 +117,7 @@
                             </div>
                             <!-- End of Modal Content -->
                             <div style="margin-top: 1rem; display: none;" class="hello">
-                                <p>Location of Requester: <strong></strong></p>
+                                <p>Location of Requester: <strong><a target="_blank" href="https://www.google.com/maps/search/<%=request.sourceLocation.lat%>,<%=request.sourceLocation.long%>">Click here to view requester's location</a></strong></p>
                                 <p>Contact Number of Requester: <strong><%= request.handler.contact %></strong></p>
                             </div>
                         </div>
@@ -165,7 +165,7 @@
         <% } %>
     </ul>
     <ul>
-        <h3>Closed SOS Requests</h3>
+        <h3>Accepted and Closed SOS Requests: </h3>
         <% if(foundAcceptRequests.length > 0){ %>
             <% if(currentUser.closedRequests.length <= 0) { %> 
                 <h5>No Closed Requests Found!</h5>

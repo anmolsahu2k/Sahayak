@@ -66,10 +66,12 @@ router.post("/request/send/medical/:id", middleware.isLoggedIn, function(req, re
                             if (error) {
                                 console.log(error);
                             } else {
+                                var d = Date(Date.now());
+                                var a = d.toString();
                                 let newActivity = {
                                     requestType: "MedicalHelp",
                                     title: "Medical Help Needed!!",
-                                    generatedAt: Date.now(),
+                                    generatedAt: a,
                                     description: req.body.message,
                                     handler: {
                                         id: req.user._id,
