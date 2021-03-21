@@ -70,7 +70,7 @@ app.use(authRoutes);
 app.use(requestRoutes);
 app.use(acceptRoutes);
 // app.use(google_maps);
-
-app.listen(process.env.APP_LISTEN_PORT, function() {
-    console.log("Server is connected");
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });

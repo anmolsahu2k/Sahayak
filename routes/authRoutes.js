@@ -89,7 +89,7 @@ router.post("/signup", function(req, res) {
                     res.redirect("/signup");
                 } else {
                     passport.authenticate("local")(req, res, function() {
-                        req.flash("success", "Welcome to SOSassist " + user.username);
+                        req.flash("success", "Welcome to Sahayak " + user.username);
                         if (req.user.role == "notAdmin")
                             res.redirect("/dashboard");
                         else if (req.user.role == "admin")
@@ -200,7 +200,7 @@ router.post("/reset", function(req, res) {
             res.redirect("/signup");
         } else {
             passport.authenticate("local")(req, res, function() {
-                req.flash("success", "Welcome to SOSassist " + user.username);
+                req.flash("success", "Welcome to Sahayak " + user.username);
                 if (req.user.role == "notAdmin")
                     res.redirect("/dashboard");
                 else if (req.user.role == "admin")
