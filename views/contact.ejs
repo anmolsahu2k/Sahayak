@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%-include('partials/header')-%>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+
+    <style>
+        html{
+            background-color: #F9FAFB;
+        }
+        form{
+            margin: 8rem auto 1rem 10.5rem;
+            max-width: 50%;
+        }
+    </style>
+<body>
+
+    <a href="/" class="btn btn-primary" style="margin-left: 11rem; border-radius: 50%; display: inline-flex;">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    <form action="" method="POST" style="display:inline-table;">
+        <div class="form-row">
+            <div class="form-group col-md-12" style="text-align: center;">
+                <h3><strong>Contact Us</strong></h3>
+            </div>
+        </div>
+        <div class="form-group col-md-12" style="text-align: center;">
+            <p>Develpoment Team of "Sahayak" is always ready to answer your queries.</p>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Name: </label>
+                <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="email">Email: </label>
+                <input type="email"  class="form-control" name="email" id="inputEmail" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-12">
+                <label for="message">Message: </label>
+                <textarea name="message" id="inputMessage" class="form-control" cols="30" rows="7" required></textarea>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-block" style="margin: auto;">Send!</button>
+    </form>
+    <%- include("partials/footer"); -%>
+</body>
+</html>
