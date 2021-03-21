@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%-include('partials/header')-%>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <style>
+        html{
+            background-color: #F9FAFB;
+        }
+    </style>
+<body>
+    <a href="/" class="btn btn-primary" style="margin-left: 11rem; border-radius: 50%; display: inline-flex;">
+        <i class="fas fa-arrow-left"></i>
+    </a>
+    <div style="display: inline-table;">
+        <h3 style="margin: 3rem auto 1rem; text-align: center;">About</h3>
+        <img style="margin: 1rem auto; display: block;" class="mb-2" src="https://fontmeme.com/permalink/210320/c38112f2aab8c423e67f009a7a09a42b.png" alt="Website Title">
+        <p style="width: 60%; margin: 2rem auto 1rem; text-align: center;">
+            Our platform enables users to volunteer and help nearby users in need of any emergency 
+            assistance or aid. Through the website, users can send SOS request to other users in the 
+            radius of 2km. Once the SOS request is sent, the nearby users receive the request and they 
+            have the choice to either accept the request or reject it depending their personal situation.
+            <br>
+            Our app will be sending SOS messages not only to nearest police/medical stations, 
+            assigned relatives but also to the local people who live near the victim’s house. 
+            All the people registered on the app will be verified with some kind of official 
+            documentation (aadhaar card/PAN etc.). This verification is done to remove the possibility 
+            of misuse of the application by some random person. All the requests made and requests 
+            answered will be stored in a log. How sending messages to people living near the victims 
+            house will help? Sending messages to the local people will be beneficial as they can offer 
+            help much faster than police/ambulances. e.g. If someone crashed his car on highway, 
+            locals can help promptly than police/ambulance.
+        </p>
+        <h3 style="margin: 3rem auto 1rem; text-align: center;">Contact Details</h3>
+        <ul style="margin: 1rem 3rem 1rem 15rem; display: block;">
+            <li><p><Strong>Abhinav Tripathi - </Strong>abhi3pathi01@gmail.com</p></li>
+            <li><p><strong>Anmol Sahu - </strong>anmolsahu2k@gmail.com</p></li>
+        </ul>
+    </div>
+    
+    <%- include("partials/footer"); -%>
+</body>
+</html>

@@ -116,6 +116,7 @@ router.post("/request/send/crime/:id", middleware.isLoggedIn, function(req, res)
         message: req.body.message,
     };
     if (req.user.crimeRequestCount < 3) {
+        let requestedUsers = [];
         Request.create(newRequest, function(err, newRequest) {
             if (err) {
                 console.log(err);

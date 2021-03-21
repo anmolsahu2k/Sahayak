@@ -15,6 +15,16 @@
     <link type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/10.15.6/sweetalert2.min.css" rel="stylesheet">
 
     <link type="text/css" href="../stylesheets/css/custom_theme.css" rel="stylesheet">
-
-
 <head>
+
+    <div class="container" style="margin-top: 1rem;">
+        <% if(success && success.length > 0) { %> 
+          <div class="alert alert-success" role="alert">
+            <%=success%>
+          </div>
+        <% }else if(error && error.length > 0) { %>
+          <div class="alert alert-danger" role="alert">
+            <%= error %>
+          </div>
+        <% } %>
+      </div>
