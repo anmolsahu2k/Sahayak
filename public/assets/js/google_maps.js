@@ -1,7 +1,3 @@
-// const Request = require("../../../models/requestSchema");
-// const User = require("../../../models/userModel");
-
-
 function geoFindMe() {
     let map, infoWindow;
 
