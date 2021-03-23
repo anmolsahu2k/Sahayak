@@ -4,6 +4,7 @@
   </a>
 
   <h3 align="center">SOS Assistance Platform</h3>
+  <h4 align="center">Deployed at <a href="https://sahayak-sos.herokuapp.com/" target="_blank">Sahayak</a>(Best works on desktop or landsacape mode in mobile)</h4>
 
 </p>
 
@@ -38,14 +39,16 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-![alt text](https://github.com/Pro-Abhinav/Sahayak/blob/master/public/assets/img/landingPage.png)
 
-Our platform enables users to volunteer and help nearby users in need of any emergency assistance or aid. Through the website, users can send SOS request to other users in  the radius of 2km. Once the SOS request is sent, the nearby users receive the request and they have the choice to either accept the request or reject it depending their personal situation
+![Landing Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/landing.png)
 
-How it is different from others? 
+Our project "Sahayak" is a community platform that enables users to volunteer and help nearby users in need of any emergency assistance or aid. Through the website, users can send SOS request to other users in the specified radius. Once the SOS request is sent, the nearby users receive the request and they have the choice to either accept the request or reject it depending on their personal situation
+
+* How it is different from others? 
 Our app will be sending SOS messages not only to nearest police/medical stations, assigned relatives but also to the local people who live near the victim’s house.
 All the people registered on the app will be verified with some kind of official documentation (aadhaar card/PAN etc.). This verification is done to remove the possibility of misuse of the application by some random person. All the requests made and requests answered will be stored in a log.
-How sending messages to people living near the victims house will help? 
+
+* How sending messages to people living near the victims house will help? 
 Sending messages to the local people will be beneficial as they can offer help much faster than police/ambulances.
 e.g. If someone crashed his car on highway, locals can help promptly than police/ambulance.
 
@@ -76,9 +79,10 @@ e.g. If someone crashed his car on highway, locals can help promptly than police
 ### Installation
 
 1. Get a Google Maps API key. 
-> Two API keys are being used 
-> - Maps Javascript API
-> - Geocoding API
+
+Two APIs are being used 
+- Maps Javascript API
+- Geocoding API
 
 2. Clone the repo
    ```sh
@@ -94,11 +98,35 @@ e.g. If someone crashed his car on highway, locals can help promptly than police
    ```
 5. Enter other secrets in '.env' file.
     ```dotenv
-    PASSPORT_SECRET = "YOUR SECRET"
-    ADMIN_SECRET_CODE = "YOUR ADMIN PASSWORD"
+
+    PASSPORT_SECRET = "This is my secret"
+    ADMIN_SECRET_CODE = "adminPassword"
+
     APP_LISTEN_PORT = 3000
     MONGO_URL = "DATABASE LINK"
     ```
+
+
+## Screenshots
+
+### Landing Page
+![Landing Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/landing.png)
+### Signup
+![Signup Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/signup.jpeg)
+### Login
+![Login Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/login.jpeg)
+### Dashboard
+![Dashboard Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/dashboard.jpeg)
+### Activity Log
+![Activity Log Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/activityLog.jpeg)
+### Activity Log Timeline
+![Activity Log Timeline](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/activityLogTimeline.jpeg)
+### Accept Requests
+![Accept Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/accept.jpeg)
+### User Settings
+![Settings Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/settings.jpeg)
+### Reset Password
+![Reset Password Page](https://github.com/anmolsahu2k/Sahayak/blob/master/public/assets/img/reset.png)
 
 
 
